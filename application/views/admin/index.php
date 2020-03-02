@@ -8,7 +8,7 @@
 	<title><?= $title ?> - PLN Tello</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- Font Awesome -->
+	<link rel="shortcut icon" href="<?= base_url('assets/adminlte/img/logo_pln.png') ?>">
 	<?php $this->load->view('admin/component/source_css') ?>
 </head>
 
