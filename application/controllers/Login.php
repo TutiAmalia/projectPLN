@@ -8,9 +8,9 @@
         {
             parent::__construct();
             $this->load->library('auth');
-            // if ($this->auth->is_logged_in()) {
-            //     redirect('dashboard');
-            // }
+            if ($this->auth->is_logged_in()) {
+                redirect('dashboard');
+            }
         }
 
         public function index()

@@ -1,7 +1,4 @@
-<?php 
-
-    defined('BASEPATH') or exit('No Direct Access Script are Allowed');
-?>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 <!DOCTYPE html>
 <html>
 <head>
