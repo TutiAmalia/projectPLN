@@ -29,7 +29,8 @@
 	<script>
 		$('#calendar').datetimepicker({
 			format: 'L',
-			inline: true
+			inline: true,
+			locale: 'id'
 		})
 
 	</script>
