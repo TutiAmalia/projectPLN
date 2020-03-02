@@ -7,7 +7,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Log in</title>
+  <title>PLN TELLO | Log in</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -29,7 +29,7 @@
           align-items: center;
           justify-content: center;
           flex-direction: row;
-          background-color: #fcfcfc;
+          background-color: #dcdcdc;
       }
   </style>
 </head>
@@ -41,7 +41,7 @@
   <!-- /.login-logo -->
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg">Sign in to start your session</p>
+      <p class="login-box-msg">Silahkan Login</p>
 
       <form action="<?= site_url('login/process')?>" method="post" autocomplete="off">
         <div class="input-group mb-3">
@@ -65,13 +65,13 @@
             <div class="icheck-primary">
               <input type="checkbox" id="remember">
               <label for="remember">
-                Remember Me
+                Ingatkan Saya
               </label>
             </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block">Masuk</button>
           </div>
           <!-- /.col -->
         </div>
@@ -94,7 +94,6 @@
     <script> 
     $(document).ready(function(){
         Swal.fire({
-        icon: 'error',
         type:'error',
         title: 'Aduh...',
         showConfirmButton:false,
