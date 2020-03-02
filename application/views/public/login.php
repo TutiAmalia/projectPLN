@@ -22,65 +22,57 @@
   <link rel="stylesheet" href="<?= base_url('assets/adminlte/css/adminlte.min.css')?>">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-  <style>
-      .login-pg {
-          height: 100vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: row;
-          background-color: #dcdcdc;
-      }
-  </style>
 </head>
-<body class="login-pg">
-<div class="login-box">
-  <div class="login-logo">
-    <img src="<?= base_url('assets/adminlte/img/logo_pln.png')?>" width="100" height="auto">
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">Silahkan Login</p>
+<body>
+  <div class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <img src="<?= base_url('assets/adminlte/img/logo_pln.png')?>" width="100" height="auto">
+      </div>
+      <!-- /.login-logo -->
+      <div class="card">
+        <div class="card-body login-card-body">
+          <p class="login-box-msg">Silahkan Login</p>
 
-      <form action="<?= site_url('login/process')?>" method="post" autocomplete="off">
-        <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Username" name="username" >  
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-user"></span>
-            </div>
-          </div>
-        </div> 
-        <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Password" name="password">
-            <div class="input-group-append">
+          <form action="<?= site_url('login/process')?>" method="post" autocomplete="off">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Username" name="username" >  
+              <div class="input-group-append">
                 <div class="input-group-text">
-                    <span class="fas fa-lock"></span>
+                  <span class="fas fa-user"></span>
+                </div>
+              </div>
+            </div> 
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" placeholder="Password" name="password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <input type="checkbox" id="remember">
-              <label for="remember">
-                Ingatkan Saya
-              </label>
+            <div class="row">
+              <div class="col-8">
+                <div class="icheck-primary">
+                  <input type="checkbox" id="remember">
+                  <label for="remember">
+                    Ingatkan Saya
+                  </label>
+                </div>
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-block">Masuk</button>
+              </div>
+              <!-- /.col -->
             </div>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-          <button type="submit" class="btn btn-primary btn-block">Masuk</button>
-          </div>
-          <!-- /.col -->
+          </form>
         </div>
-      </form>
+        <!-- /.login-card-body -->
+      </div>
     </div>
-    <!-- /.login-card-body -->
+    <!-- /.login-box -->
   </div>
-</div>
-<!-- /.login-box -->
 
 <!-- jQuery -->
 <script src="<?= base_url('assets/plugins/jquery/jquery.min.js')?>"></script>
