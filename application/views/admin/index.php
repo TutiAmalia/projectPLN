@@ -12,11 +12,11 @@
 	<?php $this->load->view('admin/component/source_css') ?>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed control-sidebar-slide-open text-sm">
+<body class="hold-transition sidebar-mini layout-fixed control-sidebar-slide-open">
 	<div class="wrapper">
 
 		<?php $this->load->view('admin/component/top_nav') ?>
-		<?php $this->load->view('admin/component/sidebar') ?>
+		<?php $this->load->view('admin/component/nav') ?>
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<?php $this->load->view($page) ?>

@@ -14,8 +14,7 @@
 		<!-- Messages Dropdown Menu -->
 		<li class="nav-item dropdown">
 			<a class="nav-link" data-toggle="dropdown" href="#">
-				<img src="<?= base_url('assets/adminlte/img/avatar5.png') ?>" class="img-circle elevation-1" alt="Foto Profil"
-					width="30px">
+				<img src="<?= base_url('assets/adminlte/img/avatar5.png') ?>" class="img-circle elevation-1" alt="Foto Profil" width="30px">
 				<span class="ml-2">Administrator</span>
 			</a>
 			<div class="dropdown-menu dropdown-menu-sm dropdown-menu-right mt-1">
