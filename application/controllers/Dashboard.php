@@ -9,6 +9,7 @@ class Dashboard extends Admin_Controller
 
 	public function index()
 	{
-		
+		$data['title'] = 'Dashboard';
+		$this->load->view('admin/index', $data);
 	}
 }
