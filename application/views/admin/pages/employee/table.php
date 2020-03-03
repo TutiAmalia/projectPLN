@@ -21,7 +21,7 @@
 		<div class="col-12">
 			<div class="card">
 				<!-- /.card-header -->
-				<div class="card-body">
+				<div class="card-body table-responsive">
 					<table id="list-pegawai" class="table table-bordered table-striped">
 						<thead>
 							<tr>
