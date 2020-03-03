@@ -12,9 +12,11 @@ class Holiday extends Admin_Controller
 	{
 		$data['title'] = 'Hari Libur';
 		$data['page'] = 'admin/pages/holiday/form';
-
-		$data['periode'] = $this->holiday->get_all_data();
-		$this->load->view('admin/index', $data);
+		$data['periode'] = $this->periode->get_all_data();
+        $this->load->view('admin/index', $data);
 	}
-	
+    
+    public function tambah(){
+        $this->load->view('admin/v_tampil');
+    }
 }
