@@ -147,7 +147,7 @@
 			<section class="col-lg-5 connectedSortable">
 
 				<!-- Calendar -->
-				<div class="card bg-gradient-success">
+				<div class="card bg-gradient-cyan">
 					<div class="card-header border-0">
 						<h3 class="card-title">
 							<i class="far fa-calendar-alt"></i>
