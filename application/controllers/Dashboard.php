@@ -10,10 +10,13 @@ class Dashboard extends Admin_Controller
 
 	public function index()
 	{
-		$data['title'] = 'Dashboard';
+		$month = date('n');
+		$year = date('Y');
+		$id_periode = $this->dashboard->get_periode_id($month, $year);
 		$data['employee_numrows'] = $this->dashboard->get_employee_numrows();
-		$data['holiday_numrows'] = $this->dashboard->get_holiday_numrows();
-		$data['vacation_employee_numrows'] = $this->dashboard->get_vacation_employee_numrows();
+		$data['holiday_numrows'] = $this->dashboard->get_holiday_numrows($id_periode);
+		$data['vacation_employee_numrows'] = $this->dashboard->get_vacation_employee_numrows($id_periode);
+		$data['title'] = 'Dashboard';
 		$data['page'] = 'admin/pages/home';
 		$this->load->view('admin/index', $data);
 	}

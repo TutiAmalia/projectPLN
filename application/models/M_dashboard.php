@@ -34,4 +34,16 @@ class M_dashboard extends CI_Model
 						->get('perizinan')
 						->num_rows();
 	}
+
+	public function get_periode_id($month, $year)
+	{
+		return $this->db
+						->select('id')
+						->where('bulan', $month)
+						->where('tahun', $year)
+						->limit(1)
+						->get('periode')
+						->row()
+						->id;
+	}
 }

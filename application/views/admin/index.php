@@ -26,14 +26,7 @@
 	</div>
 	<!-- ./wrapper -->
 	<?php $this->load->view('admin/component/source_js') ?>	
-	<script>
-		$('#calendar').datetimepicker({
-			format: 'L',
-			inline: true,
-			locale: 'id'
-		})
-
-	</script>
+	
 </body>
 
 </html>

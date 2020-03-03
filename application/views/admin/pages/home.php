@@ -34,7 +34,7 @@
 					<div class="icon">
 						<i class="ion ion-person-stalker"></i>
 					</div>
-					<a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="<?= site_url('employee') ?>" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -129,7 +129,7 @@
 			</section>
 			<!-- /.Left col -->
 			<!-- right col (We are only adding the ID to make the widgets sortable)-->
-			<section class="col-lg-5 connectedSortable">
+			<section class="col-lg-5">
 
 				<!-- Calendar -->
 				<div class="card bg-gradient-cyan">

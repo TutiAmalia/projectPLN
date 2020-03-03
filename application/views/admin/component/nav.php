@@ -31,9 +31,9 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a href="pages/widgets.html" class="nav-link">
+					<a href="<?= site_url('employee') ?>" class="nav-link <?php $this->uri->segment(1) == 'employee' and print('active') ?>" class="nav-link">
 						<i class="nav-icon fa fa-user-friends"></i>
-						<p>Modul Pegawai</p>
+						<p>Manajemen Pegawai</p>
 					</a>
 				</li>
 				<li class="nav-item has-treeview">

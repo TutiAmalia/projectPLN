@@ -31,5 +31,9 @@
 <script src="<?= base_url('assets/plugins/summernote/summernote-bs4.min.js') ?>"></script>
 <!-- overlayScrollbars -->
 <script src="<?= base_url('assets/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') ?>"></script>
+<!-- Datatable -->
+<script src="<?= base_url('assets/plugins/datatables/jquery.dataTables.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/adminlte/js/adminlte.js') ?>"></script>
+<script src="<?= base_url('assets/own/script.js') ?>"></script>

@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="<?= base_url('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') ?>">
 <!-- JQVMap -->
 <link rel="stylesheet" href="<?= base_url('assets/plugins/jqvmap/jqvmap.min.css') ?>">
+<!-- Datatable -->
+<link rel="stylesheet" href="<?= base_url('assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css') ?>">
 <!-- Theme style -->
 <link rel="stylesheet" href="<?= base_url('assets/adminlte/css/adminlte.min.css') ?>">
 <!-- overlayScrollbars -->
