@@ -95,29 +95,50 @@
 									<td>1.</td>
 									<td>Tuti Amalia</td>
 									<td>3</td>
-									<td>4</td>
+									<td>5</td>
 									<td><span class="badge bg-danger">71%</span></td>
 								</tr>
 								<tr>
 									<td>2.</td>
 									<td>Cici Purnama Sari</td>
+									<td>4</td>
 									<td>3</td>
-									<td>3</td>
-									<td><span class="badge bg-warning">75%</span></td>
+									<td><span class="badge bg-danger">72%</span></td>
 								</tr>
 								<tr>
 									<td>3.</td>
 									<td>Nurul Musfirah</td>
-									<td>2</td>
+									<td>1</td>
 									<td>3</td>
-									<td><span class="badge bg-warning">79%</span></td>
+									<td><span class="badge bg-warning">75%</span></td>
 								</tr>
 								<tr>
 									<td>4.</td>
 									<td>Ahmad Kadir</td>
 									<td>2</td>
+									<td>2</td>
+									<td><span class="badge bg-warning">79%</span></td>
+								</tr>
+								<tr>
+									<td>5.</td>
+									<td>Amelia Salsabila</td>
+									<td>0</td>
+									<td>3</td>
+									<td><span class="badge bg-warning">80%</span></td>
+								</tr>
+								<tr>
+									<td>6.</td>
+									<td>Abdullah</td>
+									<td>0</td>
 									<td>1</td>
-									<td><span class="badge bg-primary">89%</span></td>
+									<td><span class="badge bg-primary">95%</span></td>
+								</tr>
+								<tr>
+									<td>7.</td>
+									<td>Burhan</td>
+									<td>1</td>
+									<td>0</td>
+									<td><span class="badge bg-primary">97%</span></td>
 								</tr>
 							</tbody>
 						</table>
