@@ -20,7 +20,7 @@
 
 		<!-- Sidebar Menu -->
 		<nav class="mt-2">
-			<ul class="nav nav-pills nav-sidebar flex-column nav-legacy nav-flat" data-widget="treeview" role="menu"
+			<ul class="nav nav-pills nav-sidebar flex-column nav-legacy" data-widget="treeview" role="menu"
 				data-accordion="false">
 				<!-- Add icons to the links using the .nav-icon class
 				 with font-awesome or any other icon font library -->
@@ -30,11 +30,25 @@
 						<p>Dashboard</p>
 					</a>
 				</li>
-				<li class="nav-item">
-					<a href="<?= site_url('employee') ?>" class="nav-link <?php $this->uri->segment(1) == 'employee' and print('active') ?>" class="nav-link">
+				<li class="nav-item has-treeview <?php $this->uri->segment(1) == 'employee' and print('menu-open') ?>">
+					<a href="#" class="nav-link <?php $this->uri->segment(1) == 'employee' and print('active') ?>">
 						<i class="nav-icon fa fa-user-friends"></i>
-						<p>Manajemen Pegawai</p>
+						<p>Manajemen Pegawai <i class="fas fa-angle-left right"></i></p>
 					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="<?= site_url('employee') ?>" class="nav-link <?php $this->uri->segment(1) == 'employee' and print('active') ?>">
+								<i class="fa fa-table nav-icon"></i>
+								<p>Lihat daftar pegawai</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<i class="fa fa-plus nav-icon"></i>
+								<p>Tambah pegawai</p>
+							</a>
+						</li>
+					</ul>
 				</li>
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
