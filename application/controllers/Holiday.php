@@ -6,7 +6,7 @@ class Holiday extends Admin_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('m_holiday', 'holiday');
+		$this->load->model('m_holiday','holiday');
 		$this->load->library('form_validation');
 	}
 
@@ -29,7 +29,7 @@ class Holiday extends Admin_Controller
 			$this->session->set_flashdata('success','Berhasil disimpan');
 		}
 
-		$this->load->view(admin/pages/holiday/form);
+		$this->load->view("admin/pages/holiday/form");
 	}
     
 }

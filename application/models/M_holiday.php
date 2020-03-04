@@ -37,15 +37,15 @@ class M_holiday extends CI_Model
 	
 	public function getById($id)
 	{
-		return this->db->get_where($this->_table, ["id" => $id])->row();
+		return $this->db->get_where($this->_table, ["id_periode" => $id_periode])->row();
 	}
 
 	public function save()
 	{
 		$post = $this->input->post();
-		$this->id_periode = uniqid();
 		$this->tanggal = $post["tanggal"];
 		$this->ket = $post["ket"];
+		$this->id_periode=$post["id_periode"];
 		return $this->db->insert($this->_table, $this);
 	}
 }
