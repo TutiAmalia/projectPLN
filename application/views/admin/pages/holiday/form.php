@@ -19,25 +19,38 @@
 <!-- general form elements -->
 <div class="card card-primary">
     <div class="card-header">
-    <h3 class="card-title">Quick Example</h3>
+    <h3 class="card-title">Hari Libur</h3>
     </div>
     <!-- /.card-header -->
     <!-- form start -->
     <form role="form">
     <div class="card-body">
         <div class="form-group">
-            <label for="exampleInputEmail1">Tanggal</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+            <label for="exampleInputDate">Tanggal</label>
+            <input type="text" class="form-control" id="exampleInputDate">
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Periode</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <div class="col-sm-6">
+                <!-- select -->
+                <div class="form-group">
+                <label>Periode</label>
+                <select class="custom-select">
+                    <?php foreach($holiday as $data) : ?>
+                        <option value="<?= $data->id ?>"><?= $data->bulan." / ".$data->tahun ?></option>
+                    <?php endforeach ?>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputKet">Keterangan</label>
+            <input type="text" class="form-control" id="exampleInputKet">
         </div>
     </div>
     <!-- /.card-body -->
 
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Simpan</button>
+        <button type="save" class="btn btn-primary">Simpan</button>
     </div>
     </form>
 </div>

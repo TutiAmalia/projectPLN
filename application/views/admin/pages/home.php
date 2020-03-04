@@ -49,7 +49,7 @@
 					<div class="icon">
 						<i class="ion ion-calendar"></i>
 					</div>
-					<a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="<?=site_url('holiday') ?>" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
