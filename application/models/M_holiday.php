@@ -8,7 +8,7 @@ class M_holiday extends CI_Model
 	}
 
 	private $_table ="hari_libur";
-
+	public $id;
 	public $id_periode;
 	public $tanggal;
 	public $ket;
@@ -31,18 +31,19 @@ class M_holiday extends CI_Model
 	{
 		return $this->db
 						->select()
-						->get('periode')
+						->get('hari_libur')
 						->result();
 	}
 	
 	public function getById($id)
 	{
-		return $this->db->get_where($this->_table, ["id_periode" => $id_periode])->row();
+		return $this->db->get_where($this->_table, ["id" => $id])->row();
 	}
 
 	public function save()
 	{
 		$post = $this->input->post();
+		$this->id=uniqid();
 		$this->tanggal = $post["tanggal"];
 		$this->ket = $post["ket"];
 		$this->id_periode=$post["id_periode"];
