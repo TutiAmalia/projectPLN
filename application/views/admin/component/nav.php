@@ -33,7 +33,7 @@
 				<li class="nav-item has-treeview <?php $this->uri->segment(1) == 'employee' and print('menu-open') ?>">
 					<a href="#" class="nav-link <?php $this->uri->segment(1) == 'employee' and print('active') ?>">
 						<i class="nav-icon fa fa-user-friends"></i>
-						<p>Manajemen Pegawai <i class="fas fa-angle-left right"></i></p>
+						<p>Pegawai <i class="fas fa-angle-left right"></i></p>
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
@@ -46,6 +46,26 @@
 							<a href="#" class="nav-link">
 								<i class="fa fa-plus nav-icon"></i>
 								<p>Tambah pegawai</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item has-treeview <?php $this->uri->segment(1) == 'holiday' and print('menu-open') ?>">
+					<a href="#" class="nav-link <?php $this->uri->segment(1) == 'holiday' and print('active') ?>">
+						<i class="nav-icon fa fa-calendar-alt"></i>
+						<p>Hari Libur <i class="fas fa-angle-left right"></i></p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="<?= site_url('holiday') ?>" class="nav-link <?php $this->uri->segment(1) == 'holiday' and $this->uri->segment(2) == '' and print('active') ?>">
+								<i class="fa fa-table nav-icon"></i>
+								<p>Lihat daftar hari libur</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('holiday/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'holiday' and $this->uri->segment(2) == 'add' and print('active') ?>" class="nav-link">
+								<i class="fa fa-plus nav-icon"></i>
+								<p>Tambah hari libur</p>
 							</a>
 						</li>
 					</ul>

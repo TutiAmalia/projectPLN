@@ -22,7 +22,7 @@
 			<div class="card">
 				<!-- /.card-header -->
 				<div class="card-body table-responsive">
-					<table id="list-pegawai" class="table table-bordered table-striped">
+					<table id="datatable" class="table table-bordered table-striped">
 						<thead>
 							<tr>
 								<th style="width: 20px">No</th>

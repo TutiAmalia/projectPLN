@@ -8,6 +8,7 @@ class Holiday extends Admin_Controller
 		parent::__construct();
 		$this->load->model('m_holiday','holiday');
 		$this->load->library('form_validation');
+		$this->load->helper('form');
 	}
 
 	public function index()
@@ -15,25 +16,27 @@ class Holiday extends Admin_Controller
 		$data['title'] = 'Hari Libur';
 		$data['page'] = 'admin/pages/holiday/list';
 		$data['holiday'] = $this->holiday->get_all_data();
-        $this->load->view('admin/index', $data);
+    $this->load->view('admin/index', $data);
 	}
 
 	public function add(){
 		$data['title'] = 'Tambah data';
 		$data['page'] = 'admin/pages/holiday/form';
-		$data['holiday'] = $this->holiday->get_all_data();
-        $this->load->view('admin/index', $data);
+		$data['periode'] = $this->holiday->get_periode();
+    
 
 		$holiday= $this->holiday;
-		$validation= $this->form_validation;
+		$validation = $this->form_validation;
 		$validation->set_rules($holiday->rules());
 
 		if ($validation->run())
 		{
 			$holiday->save();
 			$this->session->set_flashdata('success','Berhasil disimpan');
+			redirect('holiday');
 		}
-		
+
+		$this->load->view('admin/index', $data);
 	}
     
 }

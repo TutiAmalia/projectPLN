@@ -5,7 +5,7 @@
 	<div class="container-fluid">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>List Hari Libur</h1>
+				<h1>Daftar Hari Libur</h1>
 			</div>
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
@@ -24,12 +24,12 @@
 			<div class="card">
 
 				<div class="card-header">
-					<a href="<?=site_url('holiday/add') ?>" ><i class="fas fa-plus"></i> Add New</a>
+					<a href="<?=site_url('holiday/add') ?>" ><i class="fas fa-plus"></i> Tambahkan Hari Libur</a>
 				</div>
 
 				<!-- /.card-header -->
 				<div class="card-body table-responsive">
-					<table id="list-holiday" class="table table-bordered table-striped" width="100%" cellspacing="0">
+					<table id="datatable" class="table table-bordered table-striped" width="100%" cellspacing="0">
 						<thead>
 							<tr>
 								<th style="width: 20px">No</th>
@@ -45,9 +45,9 @@
 								<tr>
 									<td><?= $no ?></td>
 									<td><?= $data->tanggal ?></td>
-									<td><?= $data->bulan ?></td>
+									<td><?= get_month_name($data->bulan) ?></td>
 									<td><?= $data->tahun ?></td>
-									<td><?= $data->ket ?></td>
+									<td><?= $data->keterangan ?></td>
 								</tr>
 								<?php $no++ ?>
 							<?php endforeach ?>

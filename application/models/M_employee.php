@@ -11,9 +11,9 @@ class M_employee extends CI_Model
 	public function get_all_data()
 	{
 		return $this->db
-						->select()
-						->get('pegawai')
-						->result();
+			->select()
+			->get('pegawai')
+			->result();
 	}
 	
 }

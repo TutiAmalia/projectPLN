@@ -17,52 +17,50 @@
 
 <!-- Main content -->
 <!-- general form elements -->
-<div class="card card-primary">
-    <!-- form start -->
-    <form role="form">
-    <div class="card-body">
-        <form action="<?php echo site_url('admin/pages/holiday/add') ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="tanggal">Tanggal</label>
-                <input class="form-control <?php echo form_error('tanggal') ? 'is-invalid':'' ?>"
-                    type="text" name="tanggal" />
-                <div class="invalid-feedback">
-                    <?php echo form_error('tanggal') ?>
-                </div>
-            </div>
+<section class="content">
+	<div class="row">
+		<div class="col-12">
+			<div class="card card-primary">
+				<!-- form start -->
+				<form role="form" action="<?= site_url('holiday/add') ?>" method="post" enctype="multipart/form-data">
+					<div class="card-body">
+						<div class="form-group col-lg-9 row">
+							<label for="tanggal">Tanggal</label>
+							<input class="form-control <?php form_error('tanggal') and print('is-invalid') ?>" type="text"
+								name="tanggal" value="<?= set_value('tanggal') ?>" />
+							<div class="invalid-feedback">
+								<?= form_error('tanggal') ?>
+							</div>
+						</div>
 
-            <div class="form-group">
-                <div class="col-sm-6">
-                    <!-- select -->
-                    <div class="form-group">
-                    <label>Periode</label>
-                    <select class="custom-select">
-                        <?php foreach($holiday as $data) : ?>
-                            <option value="<?= $data->id ?>"><?= $data->bulan." / ".$data->tahun ?></option>
-                        <?php endforeach ?>
-                    </select>
-                    </div>
-                </div>
-            </div>
+						<div class="form-group col-lg-9 row">
+							<label>Periode</label>
+							<select class="custom-select" name="id_periode">
+								<?php foreach($periode as $data) : ?>
+								<option value="<?= $data->id ?>" <?php set_value('id_periode') == $data->id and print('selected') ?>>
+									<?= get_month_name($data->bulan)." ".$data->tahun ?>
+								</option>
+								<?php endforeach ?>
+							</select>
+						</div>
 
-            <div class="form-group">
-                <label for="name">Keterangan</label>
-                <textarea class="form-control <?php echo form_error('ket') ? 'is-invalid':'' ?>"
-                    name="ket"></textarea>
-                <div class="invalid-feedback">
-                    <?php echo form_error('description') ?>
-                </div>
+						<div class="form-group col-lg-9 row">
+							<label for="name">Keterangan</label>
+							<textarea class="form-control <?php form_error('keterangan') and print('is-invalid') ?>"
+								name="keterangan"><?= set_value('keterangan') ?></textarea>
+							<div class="invalid-feedback">
+								<?= form_error('keterangan') ?>
+							</div>
+						</div>
+					</div>
+					<!-- /.card-body -->
+					<div class="card-footer">
+						<button type="submit" class="btn btn-primary">Simpan</button>
+					</div>
+				</form>
 			</div>
-        </form>
-
-    </div>
-    <!-- /.card-body -->
-
-    <div class="card-footer">
-        <button type="save" class="btn btn-primary">Simpan</button>
-    </div>
-    </form>
-</div>
-<!-- /.card -->
+			<!-- /.card -->
+		</div>
+	</div>
+</section>
 <!-- /.content -->
-

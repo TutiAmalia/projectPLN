@@ -5,7 +5,7 @@ $( function(){
 		locale: 'id'
 	});
 });
-$('#list-pegawai').DataTable({
+$('#datatable').DataTable({
 	searching: true,
 	ordering: false,
 	responsive: true
