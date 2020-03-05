@@ -37,13 +37,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('employee') ?>" class="nav-link <?php $this->uri->segment(1) == 'employee' and print('active') ?>">
+							<a href="<?= site_url('employee') ?>" class="nav-link <?php $this->uri->segment(1) == 'employee' and $this->uri->segment(2) == '' and print('active') ?>">
 								<i class="fa fa-table nav-icon"></i>
 								<p>Lihat daftar pegawai</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="#" class="nav-link">
+							<a href="<?= site_url('employee/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'employee' and $this->uri->segment(2) == 'add' and print('active') ?>">
 								<i class="fa fa-plus nav-icon"></i>
 								<p>Tambah pegawai</p>
 							</a>
@@ -63,7 +63,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('holiday/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'holiday' and $this->uri->segment(2) == 'add' and print('active') ?>" class="nav-link">
+							<a href="<?= site_url('holiday/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'holiday' and $this->uri->segment(2) == 'add' and print('active') ?>">
 								<i class="fa fa-plus nav-icon"></i>
 								<p>Tambah hari libur</p>
 							</a>
@@ -83,7 +83,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('vacation/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'vacation' and $this->uri->segment(2) == 'add' and print('active') ?>" class="nav-link">
+							<a href="<?= site_url('vacation/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'vacation' and $this->uri->segment(2) == 'add' and print('active') ?>">
 								<i class="fa fa-plus nav-icon"></i>
 								<p>Tambah Informasi Pegawai</p>
 							</a>

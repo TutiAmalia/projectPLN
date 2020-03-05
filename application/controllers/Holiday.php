@@ -14,7 +14,7 @@ class Holiday extends Admin_Controller
 	public function index()
 	{
 		$data['title'] = 'Hari Libur';
-		$data['page'] = 'admin/pages/holiday/list';
+		$data['page'] = 'admin/pages/holiday/table';
 		$data['holiday'] = $this->holiday->get_all_data();
     	$this->load->view('admin/index', $data);
 	}
