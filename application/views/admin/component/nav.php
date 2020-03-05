@@ -90,56 +90,25 @@
 						</li>
 					</ul>
 				</li>
-				<li class="nav-item has-treeview">
-					<a href="#" class="nav-link">
+				<li class="nav-item has-treeview <?php $this->uri->segment(1) == 'presence' and print('menu-open') ?>">
+					<a href="#" class="nav-link <?php $this->uri->segment(1) == 'presence' and print('active') ?>">
 						<i class="nav-icon fa fa-sliders-h"></i>
 						<p>
-							Pengaturan Data
+							Data Presensi
 							<i class="fas fa-angle-left right"></i>
-							<span class="badge badge-info right">6</span>
 						</p>
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="pages/layout/top-nav.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Top Navigation</p>
+							<a href="<?= site_url('presence') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and print('active') ?>">
+								<i class="fa fa-file-upload nav-icon"></i>
+								<p>Import file</p>
 							</a>
 						</li>
 						<li class="nav-item">
 							<a href="pages/layout/top-nav-sidebar.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Top Navigation + Sidebar</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="pages/layout/boxed.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Boxed</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="pages/layout/fixed-sidebar.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Fixed Sidebar</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="pages/layout/fixed-topnav.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Fixed Navbar</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="pages/layout/fixed-footer.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Fixed Footer</p>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="pages/layout/collapsed-sidebar.html" class="nav-link">
-								<i class="far fa-circle nav-icon"></i>
-								<p>Collapsed Sidebar</p>
+								<i class="fa fa-file-pdf nav-icon"></i>
+								<p>Laporan presensi</p>
 							</a>
 						</li>
 					</ul>
