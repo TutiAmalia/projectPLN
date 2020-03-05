@@ -21,6 +21,14 @@ class M_vacation extends CI_Model
             'label' => 'tanggal',
             'rules' => 'required'],
 
+            ['field'=> 'id_pegawai',
+            'label' => 'pegawai',
+            'rules' => 'required'],
+
+            ['field'=> 'id_periode',
+            'label' => 'periode',
+            'rules' => 'required'],
+
             ['field'=>'keterangan',
             'label'=>'keterangan',
             'rules'=>'required']
@@ -68,7 +76,7 @@ class M_vacation extends CI_Model
     {
         $post = $this->input->post();
         $this->tanggal= $post["tanggal"];
-        $this->keterangan = $post["leterangan"];
+        $this->keterangan = $post["keterangan"];
         $this->id_periode = $post["id_periode"];
         $this->id_pegawai = $post["id_pegawai"];
         return $this->db->insert($this->_table, $this);

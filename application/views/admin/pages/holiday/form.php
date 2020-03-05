@@ -35,13 +35,17 @@
 
 						<div class="form-group col-lg-9 row">
 							<label>Periode</label>
-							<select class="custom-select" name="id_periode">
+							<select class="custom-select select2bs4  <?php form_error('id_periode') and print('is-invalid') ?>" name="id_periode">
+								<option value="">Pilih Periode</option>
 								<?php foreach($periode as $data) : ?>
 								<option value="<?= $data->id ?>" <?php set_value('id_periode') == $data->id and print('selected') ?>>
 									<?= get_month_name($data->bulan)." ".$data->tahun ?>
 								</option>
 								<?php endforeach ?>
 							</select>
+							<div class="invalid-feedback">
+								<?= form_error('id_periode') ?>
+							</div>
 						</div>
 
 						<div class="form-group col-lg-9 row">

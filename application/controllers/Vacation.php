@@ -35,7 +35,7 @@ class Vacation extends Admin_Controller
             redirect('vacation');
         }
 
-        $this->loada->view('admin/index', $data);
+        $this->load->view('admin/index', $data);
 
     }
 }

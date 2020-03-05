@@ -18,11 +18,15 @@ class M_holiday extends CI_Model
 		return [
 			['field'=> 'tanggal',
 			'label' => 'tanggal',
-			'rules' => 'required'],
+			'rules' => 'required|trim|numeric'],
+
+			['field'=> 'id_periode',
+			'label' => 'periode',
+			'rules' => 'required|trim'],
 
 			['field'=> 'keterangan',
 			'label' => 'keterangan',
-			'rules' => 'required']
+			'rules' => 'required|trim']
 		];
 	}
 	
