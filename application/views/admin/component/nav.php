@@ -70,6 +70,26 @@
 						</li>
 					</ul>
 				</li>
+				<li class="nav-item has-treeview <?php $this->uri->segment(1) == 'vacation' and print('menu-open') ?>">
+					<a href="#" class="nav-link <?php $this->uri->segment(1) == 'vacation' and print('active') ?>">
+						<i class="nav-icon fa fa-calendar-alt"></i>
+						<p>Perizinan<i class="fas fa-angle-left right"></i></p>
+					</a>
+					<ul class="nav nav-treeview">
+						<li class="nav-item">
+							<a href="<?= site_url('vacation') ?>" class="nav-link <?php $this->uri->segment(1) == 'vacation' and $this->uri->segment(2) == '' and print('active') ?>">
+								<i class="fa fa-table nav-icon"></i>
+								<p>Lihat daftar pegawai izin</p>
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('vacation/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'vacation' and $this->uri->segment(2) == 'add' and print('active') ?>" class="nav-link">
+								<i class="fa fa-plus nav-icon"></i>
+								<p>Tambah Informasi Pegawai</p>
+							</a>
+						</li>
+					</ul>
+				</li>
 				<li class="nav-item has-treeview">
 					<a href="#" class="nav-link">
 						<i class="nav-icon fa fa-sliders-h"></i>

@@ -59,12 +59,12 @@
 					<div class="inner">
 						<h3><?= $vacation_employee_numrows ?></h3>
 
-						<p>Pegawai yang cuti bulan ini</p>
+						<p>Pegawai yang izin bulan ini</p>
 					</div>
 					<div class="icon">
 						<i class="ion ion-android-bicycle"></i>
 					</div>
-					<a href="#" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="<?=site_url('vacation') ?>" class="small-box-footer">Selengkapnya <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
