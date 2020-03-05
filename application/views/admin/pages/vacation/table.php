@@ -24,7 +24,7 @@
 			<div class="card">
 
 				<div class="card-header">
-					<a href="<?=site_url('holiday/add') ?>" ><i class="fas fa-plus"></i> Tambah Informasi</a>
+					<a href="<?=site_url('vacation/add') ?>" ><i class="fas fa-plus"></i> Tambah Informasi</a>
 				</div>
 
 				<!-- /.card-header -->

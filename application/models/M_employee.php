@@ -46,5 +46,19 @@ class M_employee extends CI_Model
 		$this->jenis = $post["jenis"];
 		return $this->db->insert($this->_table,$this);
 	}
+
+	public function getById($id)
+	{
+		return $this->db->get_where($this->_table, ["id"=>$id]);
+	}
+
+	public function update()
+	{
+		$post =$this->input->post();
+		$this->id=$post["id"];
+		$this->nama=$post["nama"];
+		$this->jenis=$post["jenis"];
+		return $this->db->update($this->_table, $this, array('id'=> $post['id']));
+	}
 	
 }

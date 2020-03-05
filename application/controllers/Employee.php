@@ -36,5 +36,29 @@ class Employee extends Admin_Controller
 
 		$this->load->view('admin/index', $data);
 	}
+
+	public function edit($id=null)
+	{
+		if(!isset($id)) redirect('employee/edit');
+		
+		$data['title'] = 'Edit data';
+		$data['page'] = 'admin/pages/employee/edit_form';
+
+		$employee = $this->employee;
+		$validation = $this->form_validation;
+		$validation->set_rules($employee->rules());
+
+		if($validation->run()){
+			$employee->update();
+			$this->session->set_flashdata('success', 'Berhasil disimpan');
+		}
+
+		$data["employee"] = $employee->getById($id);
+		if(!$data["employee"]) show_404();
+
+		$this->load->view("admin/index", $data);
+
+	}
+
 	
 }

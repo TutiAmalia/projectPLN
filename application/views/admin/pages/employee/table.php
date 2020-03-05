@@ -22,6 +22,9 @@
 		<div class="col-12">
 			<div class="card">
 				<!-- /.card-header -->
+					<div class="card-header">
+						<a href="<?=site_url('employee/add') ?>" ><i class="fas fa-plus"></i> Tambah Pegawai</a>
+					</div>
 				<div class="card-body table-responsive">
 					<table id="datatable" class="table table-bordered table-striped">
 						<thead>
@@ -30,6 +33,7 @@
 								<th>Kode Pegawai</th>
 								<th>Nama</th>
 								<th>Status Pegawai</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -40,6 +44,12 @@
 									<td><?= $data->id ?></td>
 									<td><?= ucwords($data->nama) ?></td>
 									<td><?= $data->jenis == 1 ? 'Pegawai' : 'Nonpegawai' ?></td>
+									<td width="250">
+										<a href="<?= site_url('employee/edit/'.$data->id) ?>"
+											class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
+										<a onclick="deleteConfirm('<?= site_url('employee/delete/'.$data->id) ?>')"
+											href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+									</td>
 								</tr>
 								<?php $no++ ?>
 							<?php endforeach ?>
