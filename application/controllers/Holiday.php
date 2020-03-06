@@ -52,7 +52,7 @@ class Holiday extends Admin_Controller
 		$validation->set_rules($holiday->rules());
 
 		if ($validation->run()) {
-			if ($holiday->update())
+			if ($holiday->update($id))
 				redirect('holiday');
 			$this->session->set_flashdata('success', 'Berhasil disimpan');
 		}

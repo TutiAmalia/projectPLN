@@ -7,7 +7,7 @@ class M_holiday extends CI_Model
 		parent::__construct();
 	}
 
-	private $_table ='hari_libur';
+	private $_table = 'hari_libur';
 	public $id;
 	public $id_periode;
 	public $tanggal;
@@ -73,12 +73,12 @@ class M_holiday extends CI_Model
 		return $this->db->insert($this->_table, $this);
 	}
 
-	public function update()
+	public function update($id)
 	{
 		$post = $this->input->post();
 		$this->tanggal = $post['tanggal'];
 		$this->keterangan = $post['keterangan'];
 		$this->id_periode = $post['id_periode'];
-		return $this->db->update($this->_table, $this, ['id'=>$id]);
+		return $this->db->update($this->_table, $this, ['id' => $id]);
 	}
 }
