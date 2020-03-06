@@ -7,7 +7,7 @@ class M_holiday extends CI_Model
 		parent::__construct();
 	}
 
-	private $_table ="hari_libur";
+	private $_table ='hari_libur';
 	public $id;
 	public $id_periode;
 	public $tanggal;
@@ -34,7 +34,7 @@ class M_holiday extends CI_Model
 	public function get_all_data()
 	{
 		return $this->db
-			->select('a.bulan, a.tahun, b.tanggal, b.keterangan')
+			->select('a.bulan, a.tahun, b.id, b.tanggal, b.keterangan')
 			->from('periode a, hari_libur b')
 			->where('a.id = b.id_periode')
 			->get()
@@ -59,12 +59,26 @@ class M_holiday extends CI_Model
 			->result();
 	}
 
+	public function get_holiday($id)
+	{
+		return $this->db->get_where($this->_table, ['id' => $id])->row();
+	}
+
 	public function save()
 	{
 		$post = $this->input->post();
-		$this->tanggal = $post["tanggal"];
-		$this->keterangan = $post["keterangan"];
-		$this->id_periode = $post["id_periode"];
+		$this->tanggal = $post['tanggal'];
+		$this->keterangan = $post['keterangan'];
+		$this->id_periode = $post['id_periode'];
 		return $this->db->insert($this->_table, $this);
+	}
+
+	public function update()
+	{
+		$post = $this->input->post();
+		$this->tanggal = $post['tanggal'];
+		$this->keterangan = $post['keterangan'];
+		$this->id_periode = $post['id_periode'];
+		return $this->db->update($this->_table, $this);
 	}
 }
