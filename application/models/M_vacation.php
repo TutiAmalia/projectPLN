@@ -7,7 +7,7 @@ class M_vacation extends CI_Model
         parent::__construct();
     }
 
-    private $_table = "perizinan";
+    private $_table = 'perizinan';
     public $id;
     public $id_pegawai;
     public $id_periode;
@@ -19,26 +19,26 @@ class M_vacation extends CI_Model
         return [
             ['field'=> 'tanggal',
             'label' => 'tanggal',
-            'rules' => 'required'],
+            'rules' => 'required|trim|numeric'],
 
             ['field'=> 'id_pegawai',
             'label' => 'pegawai',
-            'rules' => 'required'],
+            'rules' => 'required|trim'],
 
             ['field'=> 'id_periode',
             'label' => 'periode',
-            'rules' => 'required'],
+            'rules' => 'required|trim'],
 
             ['field'=>'keterangan',
             'label'=>'keterangan',
-            'rules'=>'required']
+            'rules'=>'required|trim']
         ];
     }
 
     public function get_all_data()
     {
         return $this->db
-                ->select('a.bulan, a.tahun, b.tanggal, b.keterangan, b.id_pegawai, c.nama, c.jenis')
+                ->select('a.bulan, a.tahun,b.id, b.tanggal, b.keterangan, b.id_pegawai, c.nama, c.jenis')
                 ->from('periode a, perizinan b, pegawai c')
                 ->where('a.id = b.id_periode')
                 ->where('c.id = b.id_pegawai')
@@ -72,13 +72,28 @@ class M_vacation extends CI_Model
             ->result();
     }
 
+    public function get_vacation($id)
+    {
+        return $this->db->get_where($this->_table, ['id' => $id])->row( );
+    }
+
     public function save()
     {
         $post = $this->input->post();
-        $this->tanggal= $post["tanggal"];
-        $this->keterangan = $post["keterangan"];
-        $this->id_periode = $post["id_periode"];
-        $this->id_pegawai = $post["id_pegawai"];
+        $this->tanggal = $post['tanggal'];
+        $this->keterangan = $post['keterangan'];
+        $this->id_periode = $post['id_periode'];
+        $this->id_pegawai = $post['id_pegawai'];
         return $this->db->insert($this->_table, $this);
+    }
+
+    public function update($id)
+    {
+        $post = $this->input->post();
+        $this->tanggal = $post['tanggal'];
+        $this->keterangan = $post['keterangan'];
+        $this->id_periode = $post['id_periode'];
+        $this->id_pegawai = $post['id_pegawai'];
+        return $this->db->update($this->_table, $this, ['id'=> $id]);
     }
 }
