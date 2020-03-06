@@ -39,9 +39,9 @@ class Holiday extends Admin_Controller
 		$this->load->view('admin/index', $data);
 	}
 	
-	public function edit($id)
+	public function edit($id = null)
 	{
-		if(!isset($id)) redirect('holiday/edit');
+		if(!isset($id)) redirect('holiday');
 
 		$data['title'] = 'Edit data';
 		$data['page'] = 'admin/pages/holiday/edit_form';
