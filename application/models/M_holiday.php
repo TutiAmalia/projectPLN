@@ -8,7 +8,6 @@ class M_holiday extends CI_Model
 	}
 
 	private $_table = 'hari_libur';
-	public $id;
 	public $id_periode;
 	public $tanggal;
 	public $keterangan;
