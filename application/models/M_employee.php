@@ -8,17 +8,18 @@ class M_employee extends CI_Model
 		parent::__construct();
 	}
 
-	private $_table="pegawai";
+	private $_table='pegawai';
 	public $id;
 	public $nama;
 	public $jenis;
 
-	public function rules()
+	public function rules($tipe = 1)
 	{
+		$is_unique = $tipe == 1 ? '|is_unique[pegawai.id]' : '';
 		return [
 			['field'=> 'id',
 			'label' => 'kode pegawai',
-			'rules' => 'required|trim|numeric|is_unique[pegawai.id]'],
+			'rules' => 'required|trim|numeric'.$is_unique],
 
 			['field'=> 'nama',
 			'label' => 'nama',
@@ -34,31 +35,31 @@ class M_employee extends CI_Model
 	{
 		return $this->db
 			->select()
-			->get('pegawai')
+			->get($this->_table)
 			->result();
 	}
 
 	public function save()
 	{
 		$post = $this->input->post();
-		$this->id = $post["id"];
-		$this->nama = $post["nama"];
-		$this->jenis = $post["jenis"];
+		$this->id = $post['id'];
+		$this->nama = $post['nama'];
+		$this->jenis = $post['jenis'];
 		return $this->db->insert($this->_table,$this);
 	}
 
-	public function getById($id)
+	public function get_employee($id)
 	{
-		return $this->db->get_where($this->_table, ["id"=>$id]);
+		return $this->db->get_where($this->_table, ['id' => $id])->row();
 	}
 
 	public function update()
 	{
-		$post =$this->input->post();
-		$this->id=$post["id"];
-		$this->nama=$post["nama"];
-		$this->jenis=$post["jenis"];
-		return $this->db->update($this->_table, $this, array('id'=> $post['id']));
+		$post = $this->input->post();
+		$this->id = $post['id'];
+		$this->nama = $post['nama'];
+		$this->jenis = $post['jenis'];
+		return $this->db->update($this->_table, $this, array('id'=> $this->id));
 	}
 	
 }
