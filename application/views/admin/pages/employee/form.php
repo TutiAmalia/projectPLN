@@ -23,11 +23,12 @@
 		<div class="col-12">
 			<div class="card card-primary">
 				<!-- form start -->
+					<form role="form" action="<?= site_url('employee/add') ?>" method="post" enctype="multipart/form-data">
 					<div class="card-body">
 						<div class="form-group col-lg-9 row">
 							<label for="id">Kode Pegawai</label>
 							<input class="form-control <?php form_error('id') and print('is-invalid') ?>" type="text"
-								name="id" value="<?= set_value('id') ?>" />
+								name="id" value="<?= set_value('id') ?>"/>
 							<div class="invalid-feedback">
 								<?= form_error('id') ?>
 							</div>

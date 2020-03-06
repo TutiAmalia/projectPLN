@@ -13,12 +13,13 @@ class M_employee extends CI_Model
 	public $nama;
 	public $jenis;
 
-	public function rules()
+	public function rules($tipe=1)
 	{
+		$is_unique = $tipe == 1? '|is_unique[pegawai.id]':'';
 		return [
 			['field'=> 'id',
 			'label' => 'kode pegawai',
-			'rules' => 'required|trim|numeric|is_unique[pegawai.id]'],
+			'rules' => 'required|trim|numeric'.$is_unique],
 
 			['field'=> 'nama',
 			'label' => 'nama',

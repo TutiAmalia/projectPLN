@@ -46,7 +46,7 @@ class Employee extends Admin_Controller
 
 		$employee = $this->employee;
 		$validation = $this->form_validation;
-		$validation->set_rules($employee->rules());
+		$validation->set_rules($employee->rules(2));
 
 		if($validation->run()){
 			$employee->update();

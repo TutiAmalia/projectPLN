@@ -25,14 +25,14 @@
 				<!-- form start -->
 				<form role="form" action="" method="post" enctype="multipart/form-data">
                     <div class="card-header">
-                    <a href="<?= site_url('employee/add') ?>"><i class="fas fa-arrow-left"></i>
+                    <a href="<?= site_url('employee/table') ?>"><i class="fas fa-arrow-left"></i>
                         Kembali</a>
                     </div>
 					<div class="card-body">
 						<div class="form-group col-lg-9 row">
 							<label for="id">Kode Pegawai</label>
 							<input class="form-control <?php form_error('id') and print('is-invalid') ?>" type="text"
-								name="id" value="<?= set_value('id') ?>" />
+								name="id" value="<?= set_value('id') ?>" readonly/>
 							<div class="invalid-feedback">
 								<?= form_error('id') ?>
 							</div>
