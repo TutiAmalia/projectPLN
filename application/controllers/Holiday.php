@@ -39,7 +39,7 @@ class Holiday extends Admin_Controller
 		$this->load->view('admin/index', $data);
 	}
 	
-	public function edit($id = null)
+	public function edit($id)
 	{
 		if(!isset($id)) redirect('holiday/edit');
 

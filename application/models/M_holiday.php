@@ -79,6 +79,6 @@ class M_holiday extends CI_Model
 		$this->tanggal = $post['tanggal'];
 		$this->keterangan = $post['keterangan'];
 		$this->id_periode = $post['id_periode'];
-		return $this->db->update($this->_table, $this);
+		return $this->db->update($this->_table, $this, ['id'=>$id]);
 	}
 }
