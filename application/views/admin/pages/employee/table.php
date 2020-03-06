@@ -47,8 +47,8 @@
 									<td width="250">
 										<a href="<?= site_url('employee/edit/'.$data->id) ?>"
 											class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-										<a onclick="deleteConfirm('<?= site_url('employee/delete/'.$data->id) ?>')"
-											href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+										<a onclick="deleteConfirm(<?= site_url('employee'.$data->id) ?>)"
+											href="" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
 									</td>
 								</tr>
 								<?php $no++ ?>

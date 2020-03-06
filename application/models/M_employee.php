@@ -62,4 +62,8 @@ class M_employee extends CI_Model
 		return $this->db->update($this->_table, $this, array('id'=> $this->id));
 	}
 	
+	public function delete($id)
+	{
+		return $this->db->delete($this->_table, array('id' => $this->$id));
+	}
 }

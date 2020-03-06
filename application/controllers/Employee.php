@@ -63,5 +63,13 @@ class Employee extends Admin_Controller
 
 	}
 
+	public function delete($id = null)
+	{
+		if(!isset($id)) show_404();
+		if($this->employee->delete($id))
+		{
+			redirect(site_url('employee'));
+		}
+	}
 	
 }
