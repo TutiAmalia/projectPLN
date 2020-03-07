@@ -22,9 +22,15 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="card card-primary">
+				<?php var_dump($data) ?>
 				<!-- form start -->
-				<form role="form" action="<?= site_url('holiday/add') ?>" method="post" enctype="multipart/form-data">
+				<form role="form" action="<?= site_url('presence') ?>" method="post" enctype="multipart/form-data">
 					<div class="card-body">
+						<div class="alert alert-warning col-lg-9">
+							<h5><i class="icon fas fa-exclamation-triangle"></i> Peringatan</h5>
+								Proses import ini tidak dapat dikembalikan/diulang jika terdapat kesalahan data. Pastikan mengikuti petunjuk yang ada. Jika proses telah selesai, jangan lakukan import file yang sebelumnya pernah diunggah karena akan mengakibatkan kesalahan sistem.
+							</ul>
+						</div>
 						<div class="alert alert-info alert-dismissible col-lg-9">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<h5><i class="icon fas fa-info-circle"></i> Informasi</h5>
@@ -63,7 +69,7 @@
 					</div>
 					<!-- /.card-body -->
 					<div class="card-footer">
-						<button type="submit" class="btn btn-primary">Simpan</button>
+						<button type="submit" class="btn btn-primary"><i class="fa fa-file-upload"></i> Import</button>
 					</div>
 				</form>
 			</div>
