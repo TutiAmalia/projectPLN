@@ -47,34 +47,11 @@
 										<td width="250">
 											<a href="<?= site_url('employee/edit/'.$data->id) ?>"
 												class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-											<a onclick="deleteConfirm()"
-												href="<?= site_url('employee'.$data->id) ?>" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+											<a href="<?= site_url('employee/delete/'.$data->id) ?>" class="btn btn-small text-danger delete-btn"><i class="fas fa-trash"></i> Hapus</a>
 										</td>
 									</tr>
 									<?php $no++ ?>
 								<?php endforeach ?>
-
-								<!-- jQuery -->
-								<script src="<?= base_url('assets/plugins/jquery/jquery.min.js')?>"></script>
-								<!-- Bootstrap 4 -->
-								<script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js')?>"></script>
-								<script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
-								<!-- AdminLTE App -->
-								<script src="<?= base_url('assets/adminlte/js/adminlte.min.js')?>"></script>
-
-								<?php if ($this->session->flashdata('msg')): ?>
-								<script>
-									$(document).ready(function () {
-										Swal.fire({
-											type: 'error',
-											title: 'Aduh...',
-											showConfirmButton: false,
-											timer: 4000,
-											text: '<?= $this->session->flashdata('msg') ?>'
-										})
-									})
-								</script>
-								<?php endif ?>
 							</tbody>
 						</table>
 					</div>
