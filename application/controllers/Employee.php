@@ -70,6 +70,7 @@ class Employee extends Admin_Controller
 		{
 			redirect(site_url('employee'));
 		}
+		$this->session->set_flashdata('success', 'Berhasil dihapus');
 	}
 	
 }
