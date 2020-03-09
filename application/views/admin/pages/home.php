@@ -109,7 +109,7 @@
 									<?php endforeach ?>
 									<?php else : ?>
 										<tr>
-											<td colspan="5">Belum ada data</td>
+											<td class="text-center" colspan="5">Belum ada data</td>
 										</tr>
 								<?php endif ?>
 							</tbody>
