@@ -96,8 +96,8 @@ class Presence extends Public_Controller
 						$employee[] = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
 					}
 				}
-				$ays = cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'));
-				for ($j=1; $j <= $ays; $j++) { 
+				$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
+				for ($j=1; $j <= $days; $j++) { 
 					if ($i % 2 == 1) {
 						continue;
 					}
