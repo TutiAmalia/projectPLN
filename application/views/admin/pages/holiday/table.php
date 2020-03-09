@@ -52,7 +52,7 @@
 									<td width="250">
 										<a href="<?= site_url('holiday/edit/'.$data->id) ?>"
 											class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-										<a href="<?= site_url('holiday/delete/'.$data->id) ?>" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+										<a href="<?= site_url('holiday/delete/'.$data->id) ?>" class="btn btn-small text-danger delete-btn"><i class="fas fa-trash"></i> Hapus</a>
 									</td>
 								</tr>
 								<?php $no++ ?>

@@ -52,6 +52,15 @@ class Presence extends Public_Controller
 		redirect('presence/report');
 	}
 
+	public function download()
+	{
+		$id_periode = $this->session->userdata('id_periode');
+		$data['periode'] = $this->presence->get_periode($id_periode);
+		$data['report'] = $this->presence->get_report();
+		$this->load->view('admin/pages/presence/pdf', $data);
+
+	}
+
 	private function _do_import($id_periode)
 	{
 		$periode = $this->presence->get_periode($id_periode);
