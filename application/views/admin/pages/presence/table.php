@@ -22,10 +22,12 @@
 		<div class="col-12">
 			<div class="card">
 				<!-- /.card-header -->
-					<div class="card-header">
-						<div class="col-lg-4 row">
+				<div class="card-header">
+					<div class="row justify-content-between align-items-center">
+						<div class="col-lg-4">
 							<form action="<?= site_url('presence/select_periode') ?>" method="post">
-								<select class="custom-select select2bs4" name="id_periode" onchange="if(this.value != '') { this.form.submit(); }">
+								<select class="custom-select select2bs4" name="id_periode"
+									onchange="if(this.value != '') { this.form.submit(); }">
 									<option value="">Pilih Periode</option>
 									<?php foreach($periode as $data) : ?>
 									<option value="<?= $data->id ?>" <?php $id_periode == $data->id and print('selected') ?>>
@@ -35,7 +37,11 @@
 								</select>
 							</form>
 						</div>
+						<div class="col-lg-4 text-right">
+							<a href="<?=site_url('presence/download') ?>" class="btn btn-info"><i class="fas fa-print"></i> Cetak laporan</a>
+						</div>
 					</div>
+				</div>
 				<div class="card-body table-responsive">
 					<table id="datatable" class="table table-bordered table-striped">
 						<thead>
@@ -52,16 +58,16 @@
 						<tbody>
 							<?php $no = 1 ?>
 							<?php foreach($report as $data) : ?>
-								<tr>
-									<td><?= $no ?></td>
-									<td><?= $data->id_pegawai ?></td>
-									<td><?= ucwords($data->nama) ?></td>
-									<td><?= $data->kehadiran ?></td>
-									<td><?= $data->keterlambatan ?></td>
-									<td><?= $data->ketidakhadiran ?></td>
-									<td><?= $data->persentase_kehadiran ?>%</td>
-								</tr>
-								<?php $no++ ?>
+							<tr>
+								<td><?= $no ?></td>
+								<td><?= $data->id_pegawai ?></td>
+								<td><?= ucwords($data->nama) ?></td>
+								<td><?= $data->kehadiran ?></td>
+								<td><?= $data->keterlambatan ?></td>
+								<td><?= $data->ketidakhadiran ?></td>
+								<td><?= $data->persentase_kehadiran ?>%</td>
+							</tr>
+							<?php $no++ ?>
 							<?php endforeach ?>
 						</tbody>
 					</table>
