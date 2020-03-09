@@ -2,7 +2,7 @@
 
 class M_presence extends CI_Model 
 {
-	private $_table ="presensi";
+	private $_table ="log_presensi";
 	public $id;
 	public $id_periode;
 	public $tanggal;
@@ -11,7 +11,43 @@ class M_presence extends CI_Model
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library('upload');
+	}
+
+	public function get_all_periode()
+	{
+		return $this->db->get('periode')->result();
+	}
+
+	public function get_periode($id)
+	{
+		return $this->db
+			->select()
+			->where('id', $id)
+			->get('periode')
+			->row();
+	}
+
+	public function get_last_period()
+	{
+		return $this->db
+			->select('id')
+			->order_by('id', 'DESC')
+			->limit(1)
+			->get('periode')
+			->row()
+			->id;
+	}
+
+	public function get_report()
+	{
+		$id_periode = $this->session->userdata('id_periode');
+		return $this->db
+			->select('a.id, a.nama, b.*')
+			->where('a.id = b.id_pegawai')
+			->where('b.id_periode', $id_periode)
+			->from('pegawai a, presensi b')
+			->get()
+			->result();
 	}
 
 	public function rules()
@@ -20,46 +56,65 @@ class M_presence extends CI_Model
 			['field'=> 'id_periode',
 			'label' => 'periode',
 			'rules' => 'required|trim'],
-
-			['field'=> 'file_excel',
-			'label' => 'file log',
-			'rules' => 'required|trim']
 		];
 	}
 
-	public function get_periode()
-	{
-		return $this->db
-			->select()
-			->get('periode')
-			->result();
-	}
-
-	private function _config($file_name)
+	public function config($file_name)
 	{
 		$config['upload_path'] = './excel';
-		$config['allowed_types'] = 'xls|xlsx';
+		$config['allowed_types'] = 'xls';
 		$config['max_size'] = '2048';
 		$config['file_name'] = $file_name;
 
 		return $config;
 	}
 
-	public function do_import()
+
+	public function count_presence($id)
 	{
-		$file_uploaded = $this->upload->data();
-		$file_name = date('Y') .'_'. $file_uploaded['file_name'];
+		return $this->db
+			->select('id')
+			->where('id_pegawai', $id)
+			->get($this->_table)
+			->num_rows();
+	}
 
-		$this->upload->initialize($this->_config($file_name));
+	public function count_delay($id)
+	{
+		return $this->db
+			->select('id')
+			->where('id_pegawai', $id)
+			->where('jam_masuk >', '08:00:00')
+			->get($this->_table)
+			->num_rows();
+	}
 
-		$output = array();
+	public function count_permit($id, $periode)
+	{
+		return $this->db
+			->select('id')
+			->where('id_pegawai', $id)
+			->where('id_periode', $periode)
+			->get('perizinan')
+			->num_rows();
+	}
 
-		if ($this->upload->do_upload('file_excel')) {
-			$output = ['success' => true, 'file' => $file_uploaded, 'error' => null];
-		} else {
-			$output = ['success' => false, 'file' => '', 'error' => $this->upload->display_errors()];
-		}
+	public function count_holiday($periode)
+	{
+		return $this->db
+			->select('id')
+			->where('id_periode', $periode)
+			->get('hari_libur')
+			->num_rows();
+	}
 
-		return $output;
+	public function insert_report($data)
+	{
+		return $this->db->insert_batch('presensi', $data);
+	}
+
+	public function insert_log($data)
+	{
+		return $this->db->insert_batch($this->_table, $data);
 	}
 }

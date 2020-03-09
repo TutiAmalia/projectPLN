@@ -76,7 +76,7 @@
 			<section class="col-lg-7 connectedSortable">
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title text-bold">Daftar Pegawai dengan Jumlah Keterlambatan Tertinggi</h3>
+						<h3 class="card-title text-bold">10 teratas pegawai absen terbanyak periode lalu</h3>
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body p-0 table-responsive">
@@ -85,61 +85,33 @@
 								<tr>
 									<th style="width: 10px">#</th>
 									<th>Nama Pegawai</th>
-									<th>Terlambat</th>
 									<th>Tidak hadir</th>
+									<th>Terlambat</th>
 									<th style="width: 30px">Kehadiran</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1.</td>
-									<td>Tuti Amalia</td>
-									<td>3</td>
-									<td>5</td>
-									<td><span class="badge bg-danger">71%</span></td>
-								</tr>
-								<tr>
-									<td>2.</td>
-									<td>Cici Purnama Sari</td>
-									<td>4</td>
-									<td>3</td>
-									<td><span class="badge bg-danger">72%</span></td>
-								</tr>
-								<tr>
-									<td>3.</td>
-									<td>Nurul Musfirah</td>
-									<td>1</td>
-									<td>3</td>
-									<td><span class="badge bg-warning">75%</span></td>
-								</tr>
-								<tr>
-									<td>4.</td>
-									<td>Ahmad Kadir</td>
-									<td>2</td>
-									<td>2</td>
-									<td><span class="badge bg-warning">79%</span></td>
-								</tr>
-								<tr>
-									<td>5.</td>
-									<td>Amelia Salsabila</td>
-									<td>0</td>
-									<td>3</td>
-									<td><span class="badge bg-warning">80%</span></td>
-								</tr>
-								<tr>
-									<td>6.</td>
-									<td>Abdullah</td>
-									<td>0</td>
-									<td>1</td>
-									<td><span class="badge bg-primary">95%</span></td>
-								</tr>
-								<tr>
-									<td>7.</td>
-									<td>Burhan</td>
-									<td>1</td>
-									<td>0</td>
-									<td><span class="badge bg-primary">97%</span></td>
-								</tr>
+								<?php $no = 1 ?>
+								<?php if($top_10_employees) : ?>
+									<?php foreach($top_10_employees as $data) : ?>
+										<?php $stat = $data->persentase_kehadiran ?>
+										<?php $badge = ($stat <= 60) ? 'bg-danger' : 'bg-warning' ?>
+										<tr>
+											<td><?= $no ?></td>
+											<td><?= ucwords($data->nama) ?></td>
+											<td><?= $data->ketidakhadiran ?></td>
+											<td><?= $data->keterlambatan ?></td>
+											<td>
+												<span class="badge <?= $badge ?>"><?= $stat ?>%</span>
+											</td>
+										</tr>
+										<?php $no++ ?>
+									<?php endforeach ?>
+									<?php else : ?>
+										<tr>
+											<td colspan="5">Belum ada data</td>
+										</tr>
+								<?php endif ?>
 							</tbody>
 						</table>
 					</div>

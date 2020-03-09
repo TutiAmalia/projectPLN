@@ -22,15 +22,9 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="card card-primary">
-				<?php var_dump($data) ?>
 				<!-- form start -->
 				<form role="form" action="<?= site_url('presence') ?>" method="post" enctype="multipart/form-data">
 					<div class="card-body">
-						<div class="alert alert-warning col-lg-9">
-							<h5><i class="icon fas fa-exclamation-triangle"></i> Peringatan</h5>
-								Proses import ini tidak dapat dikembalikan/diulang jika terdapat kesalahan data. Pastikan mengikuti petunjuk yang ada. Jika proses telah selesai, jangan lakukan import file yang sebelumnya pernah diunggah karena akan mengakibatkan kesalahan sistem.
-							</ul>
-						</div>
 						<div class="alert alert-info alert-dismissible col-lg-9">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							<h5><i class="icon fas fa-info-circle"></i> Informasi</h5>
@@ -59,10 +53,11 @@
 
 						<div class="form-group col-lg-9 row">
 							<label for="file-excel">File Log</label>
-							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" id="file-excel" name="file_excel">
-									<label class="custom-file-label" for="file-excel">Pilih file</label>
+							<div class="custom-file d-block">
+								<input type="file" class="custom-file-input <?php $this->session->flashdata('file_excel') and print('is-invalid') ?>" id="file-excel" name="file_excel">
+								<label class="custom-file-label" for="file-excel">Pilih file</label>
+								<div class="invalid-feedback">
+									<?= $this->session->flashdata('file_excel') ?>
 								</div>
 							</div>
 						</div>

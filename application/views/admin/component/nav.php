@@ -85,7 +85,7 @@
 						<li class="nav-item">
 							<a href="<?= site_url('vacation/add') ?>" class="nav-link <?php $this->uri->segment(1) == 'vacation' and $this->uri->segment(2) == 'add' and print('active') ?>">
 								<i class="fa fa-plus nav-icon"></i>
-								<p>Tambah Informasi Pegawai</p>
+								<p>Tambah pegawai izin</p>
 							</a>
 						</li>
 					</ul>
@@ -100,13 +100,13 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('presence') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and print('active') ?>">
+							<a href="<?= site_url('presence/clear') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and print('active') ?>">
 								<i class="fa fa-file-upload nav-icon"></i>
 								<p>Import file</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+							<a href="<?= site_url('presence/clear/report') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == 'report' and print('active') ?>">
 								<i class="fa fa-file-pdf nav-icon"></i>
 								<p>Laporan presensi</p>
 							</a>

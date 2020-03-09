@@ -46,4 +46,18 @@ class M_dashboard extends CI_Model
 			->row()
 			->id;
 	}
+
+	public function get_top_10($id_periode)
+	{
+		return $this->db
+			->select('a.id, a.nama, b.*')
+			->where('a.id = b.id_pegawai')
+			->where('id_periode', $id_periode)
+			->from('pegawai a, presensi b')
+			->order_by('ketidakhadiran', 'desc')
+			->order_by('keterlambatan', 'desc')
+			->limit(10)
+			->get()
+			->result();
+	}
 }
