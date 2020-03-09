@@ -40,6 +40,7 @@
 								<th>Bulan</th>
 								<th>Tahun</th>
 								<th>Keterangan</th>
+								<th>Action</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -54,6 +55,12 @@
 									<td><?= get_month_name($data->bulan) ?></td>
 									<td><?= $data->tahun ?></td>
 									<td><?= $data->keterangan ?></td>
+									<td width="250">
+										<a href="<?= site_url('vacation/edit/'.$data->id) ?>"
+											class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
+										<a onclick="deleteConfirm('<?= site_url('vacation/delete/'.$data->id) ?>')"
+											href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
+									</td>
 								</tr>
 								<?php $no++ ?>
 							<?php endforeach ?>

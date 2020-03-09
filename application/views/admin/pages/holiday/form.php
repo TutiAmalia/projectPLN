@@ -23,7 +23,11 @@
 		<div class="col-12">
 			<div class="card card-primary">
 				<!-- form start -->
-				<form role="form" action="<?= site_url('holiday/add') ?>" method="post" enctype="multipart/form-data">
+				<form role="form" action="" method="post" enctype="multipart/form-data">
+					<div class="card-header">
+						<a href="<?= site_url('holiday') ?>"><i class="fas fa-arrow-left"></i>
+							Kembali</a>
+					</div>
 					<div class="card-body">
 						<div class="form-group col-lg-9 row">
 							<label for="tanggal">Tanggal</label>

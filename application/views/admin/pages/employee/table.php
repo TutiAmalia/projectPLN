@@ -25,37 +25,36 @@
 					<div class="card-header">
 						<a href="<?=site_url('employee/add') ?>" ><i class="fas fa-plus"></i> Tambah Pegawai</a>
 					</div>
-				<div class="card-body table-responsive">
-					<table id="datatable" class="table table-bordered table-striped">
-						<thead>
-							<tr>
-								<th style="width: 20px">No</th>
-								<th>Kode Pegawai</th>
-								<th>Nama</th>
-								<th>Status Pegawai</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<?php $no = 1 ?>
-							<?php foreach($employees as $data) : ?>
+					<div class="card-body table-responsive">
+						<table id="datatable" class="table table-bordered table-striped">
+							<thead>
 								<tr>
-									<td><?= $no ?></td>
-									<td><?= $data->id ?></td>
-									<td><?= ucwords($data->nama) ?></td>
-									<td><?= $data->jenis == 1 ? 'Pegawai' : 'Nonpegawai' ?></td>
-									<td width="250">
-										<a href="<?= site_url('employee/edit/'.$data->id) ?>"
-											class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
-										<a onclick="deleteConfirm('<?= site_url('employee/delete/'.$data->id) ?>')"
-											href="#!" class="btn btn-small text-danger"><i class="fas fa-trash"></i> Hapus</a>
-									</td>
+									<th style="width: 20px">No</th>
+									<th>Kode Pegawai</th>
+									<th>Nama</th>
+									<th>Status Pegawai</th>
+									<th>Action</th>
 								</tr>
-								<?php $no++ ?>
-							<?php endforeach ?>
-						</tbody>
-					</table>
-				</div>
+							</thead>
+							<tbody>
+								<?php $no = 1 ?>
+								<?php foreach($employees as $data) : ?>
+									<tr>
+										<td><?= $no ?></td>
+										<td><?= $data->id ?></td>
+										<td><?= ucwords($data->nama) ?></td>
+										<td><?= $data->jenis == 1 ? 'Pegawai' : 'Nonpegawai' ?></td>
+										<td width="250">
+											<a href="<?= site_url('employee/edit/'.$data->id) ?>"
+												class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
+											<a href="<?= site_url('employee/delete/'.$data->id) ?>" class="btn btn-small text-danger delete-btn"><i class="fas fa-trash"></i> Hapus</a>
+										</td>
+									</tr>
+									<?php $no++ ?>
+								<?php endforeach ?>
+							</tbody>
+						</table>
+					</div>
 				<!-- /.card-body -->
 			</div>
 			<!-- /.card -->

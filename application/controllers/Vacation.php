@@ -38,4 +38,29 @@ class Vacation extends Admin_Controller
         $this->load->view('admin/index', $data);
 
     }
+
+    public function edit($id)
+    {
+        if(!isset($id)) redirect('vacation/edit');
+
+        $data['title'] = 'Tambah data';
+        $data['page'] = 'admin/pages/vacation/edit_form';
+        $data['periode'] = $this->vacation->get_periode();
+        $data['pegawai'] = $this->vacation->get_employee();
+
+        $vacation = $this->vacation;
+        $validation = $this->form_validation;
+        $validation->set_rules($vacation->rules());
+
+        if ($validation->run()) {
+            $vacation->update($id);
+            $this->session->set_flashdata('success', 'Berhasil disimpan');
+            redirect('vacation');
+        }
+
+        $data['vacation'] = $vacation->get_vacation($id);
+        if(!$data['vacation']) show_404();
+
+        $this->load->view('admin/index', $data);
+    }
 }

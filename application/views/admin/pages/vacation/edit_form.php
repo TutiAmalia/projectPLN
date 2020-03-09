@@ -34,7 +34,7 @@
 							<select class="custom-select select2bs4  <?php form_error('id_pegawai') and print('is-invalid') ?>" name="id_pegawai">
 								<option value="">Pilih Pegawai</option>
 								<?php foreach($pegawai as $data) : ?>
-								<option value="<?= $data->id ?>" <?php set_value('id_pegawai') == $data->id and print('selected') ?>>
+								<option value="<?= $data->id ?>" <?php set_value('id_pegawai', $vacation->id_pegawai) == $data->id and print('selected') ?>>
 									<?= $data->id." - ".$data->nama ?>
 								</option>
 								<?php endforeach ?>
@@ -47,7 +47,7 @@
 						<div class="form-group col-lg-9 row">
 							<label for="tanggal">Tanggal</label>
 							<input class="form-control <?php form_error('tanggal') and print('is-invalid') ?>" type="text"
-								name="tanggal" value="<?= set_value('tanggal') ?>" />
+								name="tanggal" value="<?= set_value('tanggal', $vacation->tanggal) ?>" />
 							<div class="invalid-feedback">
 								<?= form_error('tanggal') ?>
 							</div>
@@ -58,7 +58,7 @@
 							<select class="custom-select select2bs4  <?php form_error('id_periode') and print('is-invalid') ?>" name="id_periode">
 								<option value="">Pilih Periode</option>
 								<?php foreach($periode as $data) : ?>
-								<option value="<?= $data->id ?>" <?php set_value('id_periode') == $data->id and print('selected') ?>>
+								<option value="<?= $data->id ?>" <?php set_value('id_periode', $vacation->id_periode) == $data->id and print('selected') ?>>
 									<?= get_month_name($data->bulan)." ".$data->tahun ?>
 								</option>
 								<?php endforeach ?>
@@ -70,8 +70,8 @@
 
 						<div class="form-group col-lg-9 row">
 							<label for="name">Keterangan</label>
-							<textarea class="form-control <?php form_error('keterangan') and print('is-invalid') ?>"
-								name="keterangan"><?= set_value('keterangan') ?></textarea>
+							<textarea class="form-control <?php form_error('keterangan', $vacation->keterangan) and print('is-invalid') ?>"
+								name="keterangan"><?= set_value('keterangan', $vacation->keterangan) ?></textarea>
 							<div class="invalid-feedback">
 								<?= form_error('keterangan') ?>
 							</div>
