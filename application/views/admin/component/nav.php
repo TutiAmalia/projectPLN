@@ -73,7 +73,7 @@
 				<li class="nav-item has-treeview <?php $this->uri->segment(1) == 'vacation' and print('menu-open') ?>">
 					<a href="#" class="nav-link <?php $this->uri->segment(1) == 'vacation' and print('active') ?>">
 						<i class="nav-icon fa fa-calendar-alt"></i>
-						<p>Perizinan<i class="fas fa-angle-left right"></i></p>
+						<p>Izin Cuti<i class="fas fa-angle-left right"></i></p>
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">

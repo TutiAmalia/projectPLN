@@ -11,7 +11,7 @@ class Presence extends Public_Controller
 		$this->load->library(array('form_validation', 'spreadsheet_excel_reader', 'upload'));
 	}
 
-	public function clear($page = 'index')
+	public function clear($page = '')
 	{
 		$this->session->unset_userdata('id_periode');
 		redirect("presence/{$page}");
