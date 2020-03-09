@@ -80,4 +80,10 @@ class M_holiday extends CI_Model
 		$this->id_periode = $post['id_periode'];
 		return $this->db->update($this->_table, $this, ['id' => $id]);
 	}
+
+	public function delete($id)
+	{
+		return $this->db->delete($this->_table, ['id' => $id]);
+	}
+
 }

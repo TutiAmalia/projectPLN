@@ -62,4 +62,14 @@ class Holiday extends Admin_Controller
 
 		$this->load->view('admin/index', $data);
 	}
+
+	public function delete($id = null)
+	{
+		if(!isset($id)) show_404();
+		if($this->holiday->delete($id))
+		{
+			redirect(site_url('holiday'));
+		}
+		$this->session->set_flashdata('success', 'Berhasil dihapus');
+	}
 }
