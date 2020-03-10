@@ -57,9 +57,9 @@
 									<td><?= $data->keterangan ?></td>
 									<td width="250">
 										<a href="<?= site_url('vacation/edit/'.$data->id) ?>"
-											class="btn btn-small"><i class="fas fa-edit"></i> Edit</a>
+											class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
 										<a href=" <?= site_url('vacation/delete/'.$data->id) ?>"
-											class="btn btn-small text-danger delete-btn"><i class="fas fa-trash"></i> Hapus</a>
+											class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
 									</td>
 								</tr>
 								<?php $no++ ?>
