@@ -96,4 +96,9 @@ class M_vacation extends CI_Model
         $this->id_pegawai = $post['id_pegawai'];
         return $this->db->update($this->_table, $this, ['id'=> $id]);
     }
+
+    public function delete($id)
+    {
+        return $this->db->delete($this->_table, ['id' => $id]);
+    }
 }

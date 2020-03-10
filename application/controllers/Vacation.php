@@ -63,4 +63,14 @@ class Vacation extends Admin_Controller
 
         $this->load->view('admin/index', $data);
     }
+
+    public function delete($id = null)
+    {
+        if(!isset($id)) show_404();
+        if($this->vacation->delete($id))
+        {
+            redirect(site_url('vacation'));
+        }
+        $this->session->set_flashdata('success', ' Berhasil dihapus');
+    }
 }
