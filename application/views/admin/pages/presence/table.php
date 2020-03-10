@@ -54,6 +54,7 @@
 								<th>Terlambat</th>
 								<th>Tidak hadir</th>
 								<th>Persentase Kehadiran</th>
+								<th>Detail</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -67,6 +68,9 @@
 								<td><?= $data->keterlambatan ?></td>
 								<td><?= $data->ketidakhadiran ?></td>
 								<td><?= $data->persentase_kehadiran ?>%</td>
+								<td>
+								<a href="<?= site_url('presence/detail/'.$data->id) ?>" class="btn btn-sm text-info"><i class="fas fa-info-circle"></i> Detail</a>
+								</td>
 							</tr>
 							<?php $no++ ?>
 							<?php endforeach ?>

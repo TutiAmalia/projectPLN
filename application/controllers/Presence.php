@@ -151,4 +151,9 @@ class Presence extends Public_Controller
 		} 
 		return false;
 	}
+
+	public function detail()
+	{
+		
+	}
 }
