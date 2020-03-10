@@ -37,8 +37,8 @@
 								</select>
 							</div>
 							<div class="col-lg-4 text-right">
-								<a href="<?=site_url('presence/download') ?>" target="_blank" class="btn btn-info"><i
-										class="fas fa-print"></i> Cetak laporan</a>
+								<a href="<?=site_url('presence/print') ?>" target="_blank" class="btn btn-info"><i class="fas fa-print"></i> Cetak laporan</a>
+								<a href="<?=site_url('presence/download') ?>" target="_blank" class="btn btn-success"><i class="fas fa-download"></i> Unduh laporan</a>
 							</div>
 						</div>
 					</div>
