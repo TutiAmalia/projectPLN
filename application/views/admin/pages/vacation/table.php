@@ -59,7 +59,7 @@
 										<a href="<?= site_url('vacation/edit/'.$data->id) ?>"
 											class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
 										<a href=" <?= site_url('vacation/delete/'.$data->id) ?>"
-											class="btn btn-danger btn-sm"><i class="fas fa-trash"></i> Hapus</a>
+											class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i> Hapus</a>
 									</td>
 								</tr>
 								<?php $no++ ?>
