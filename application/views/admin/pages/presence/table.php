@@ -69,7 +69,7 @@
 								<td><?= $data->ketidakhadiran ?></td>
 								<td><?= $data->persentase_kehadiran ?>%</td>
 								<td>
-								<a href="<?= site_url('presence/detail/'.$data->id) ?>" class="btn btn-sm text-info"><i class="fas fa-info-circle"></i> Detail</a>
+								<a href="<?= site_url('presence/detail/'.urlencode(base64_encode($key.$data->id_pegawai))) ?>" class="btn btn-sm text-info"><i class="fas fa-info-circle"></i> Detail</a>
 								</td>
 							</tr>
 							<?php $no++ ?>

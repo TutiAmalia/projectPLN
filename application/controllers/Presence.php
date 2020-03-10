@@ -1,8 +1,9 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
-class Presence extends Public_Controller 
+class Presence extends Admin_Controller 
 {
 	private static $path = './excel/';
+	private static $key = 'igniter16';
 	public function __construct()
 	{
 		parent::__construct();
@@ -40,6 +41,7 @@ class Presence extends Public_Controller
 		if (!$this->session->userdata('id_periode')) {
 			$this->session->set_userdata('id_periode', $id_periode);
 		}
+		$data['key'] = self::$key;
 		$data['id_periode'] = $this->session->userdata('id_periode');
 		$data['report'] = $this->presence->get_report();
 		$this->load->view('admin/index', $data);
@@ -68,6 +70,26 @@ class Presence extends Public_Controller
 		$data['action'] = 'download';
 		$data['report'] = $this->presence->get_report();
 		$this->load->view('admin/pages/presence/pdf', $data);
+	}
+
+	public function detail($id = null)
+	{
+		if ($id = null) redirect('presence/report'); 
+		$id_pegawai_raw = base64_decode(urldecode($id));
+		$id_pegawai = preg_replace('/%s/', self::$key, $id_pegawai_raw);
+		$id_periode = $this->session->userdata('id_periode');
+		$periode = $this->presence->get_periode();
+		if ($this->presence->is_employee($id_pegawai) == 1) {
+			$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
+			$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
+			$weekdays = count_weekdays($periode->bulan, $periode->tahun);
+			$permits = $this->presence->count_permit($id, $periode->bulan);
+			$holidays = $this->presence->count_holiday($periode->bulan);
+			$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
+			$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
+			$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
+			$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
+		}
 	}
 
 	private function _do_import($id_periode)
@@ -132,8 +154,8 @@ class Presence extends Public_Controller
 				foreach ($employee as $id) {
 					$report_temp['id_pegawai'] = $id;
 					$report_temp['id_periode'] = $id_periode;
-					$report_temp['kehadiran'] = $this->presence->count_presence($id);
-					$report_temp['keterlambatan'] = $this->presence->count_delay($id);
+					$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
+					$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
 					$weekdays = count_weekdays($periode->bulan, $periode->tahun);
 					$permits = $this->presence->count_permit($id, $periode->bulan);
 					$holidays = $this->presence->count_holiday($periode->bulan);
@@ -152,8 +174,4 @@ class Presence extends Public_Controller
 		return false;
 	}
 
-	public function detail()
-	{
-		
-	}
 }

@@ -69,32 +69,42 @@ class M_presence extends CI_Model
 		return $config;
 	}
 
-
-	public function count_presence($id)
+	public function is_employee($id)
 	{
 		return $this->db
 			->select('id')
-			->where('id_pegawai', $id)
+			->where('id', $id)
+			->get('pegawai')
+			->num_rows();
+	}
+
+	public function count_presence($id_pegawai, $id_periode)
+	{
+		return $this->db
+			->select('id')
+			->where('id_pegawai', $id_pegawai)
+			->where('id_periode', $id_periode)
 			->get($this->_table)
 			->num_rows();
 	}
 
-	public function count_delay($id)
+	public function count_delay($id_pegawai, $id_periode)
 	{
 		return $this->db
 			->select('id')
-			->where('id_pegawai', $id)
+			->where('id_pegawai', $id_pegawai)
+			->where('id_periode', $id_periode)
 			->where('jam_masuk >', '08:00:00')
 			->get($this->_table)
 			->num_rows();
 	}
 
-	public function count_permit($id, $periode)
+	public function count_permit($id_pegawai, $id_periode)
 	{
 		return $this->db
 			->select('id')
-			->where('id_pegawai', $id)
-			->where('id_periode', $periode)
+			->where('id_pegawai', $id_pegawai)
+			->where('id_periode', $id_periode)
 			->get('perizinan')
 			->num_rows();
 	}
