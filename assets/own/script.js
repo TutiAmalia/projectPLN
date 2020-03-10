@@ -34,6 +34,9 @@ $('.delete-btn').click(function(event) {
 $('#datatable').DataTable({
 	searching: true,
 	ordering: false,
-	responsive: true
+	responsive: true,
+	language: {
+		url: ASSET_PATH + '/plugins/datatables/dataTables.indonesian.lang'
+	}
 });
 

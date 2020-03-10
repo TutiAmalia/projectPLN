@@ -22,11 +22,11 @@
 		<div class="col-12">
 			<div class="card">
 				<!-- /.card-header -->
-				<div class="card-header">
-					<div class="row justify-content-between align-items-center">
-						<div class="col-lg-4">
-							<form action="<?= site_url('presence/select_periode') ?>" method="post">
-								<select class="custom-select select2bs4" name="id_periode"
+				<form role="form"" action=" <?= site_url('presence/select_periode') ?>" method="post">
+					<div class="card-header">
+						<div class="row justify-content-between align-items-center">
+							<div class="col-lg-3">
+								<select class="custom-select select2bs4 form-control-sm" name="id_periode"
 									onchange="if(this.value != '') { this.form.submit(); }">
 									<option value="">Pilih Periode</option>
 									<?php foreach($periode as $data) : ?>
@@ -35,13 +35,14 @@
 									</option>
 									<?php endforeach ?>
 								</select>
-							</form>
-						</div>
-						<div class="col-lg-4 text-right">
-							<a href="<?=site_url('presence/download') ?>" class="btn btn-info"><i class="fas fa-print"></i> Cetak laporan</a>
+							</div>
+							<div class="col-lg-4 text-right">
+								<a href="<?=site_url('presence/download') ?>" target="_blank" class="btn btn-info"><i
+										class="fas fa-print"></i> Cetak laporan</a>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 				<div class="card-body table-responsive">
 					<table id="datatable" class="table table-bordered table-striped">
 						<thead>

@@ -53,9 +53,14 @@
 	</div>
 	<script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
 	<script>
-		$(document).ready(function(){
-			window.print();
-		})
+		window.print();
+		window.onafterprint = function(){ window.close();};
+		const printEvent = window.matchMedia('print');
+		printEvent.addListener(function(printEnd) {
+				if (!printEnd.matches) {
+					window.close();
+				};
+		});
 	</script>
 </body>
 
