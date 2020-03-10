@@ -49,6 +49,16 @@ class M_presence extends CI_Model
 			->get()
 			->result();
 	}
+	
+	public function get_daily_report($id_pegawai, $id_periode)
+	{
+		return $this->db
+			->select()
+			->where('id_pegawai', $id_pegawai)
+			->where('id_periode', $id_periode)
+			->get($this->_table)
+			->result_array();
+	}
 
 	public function rules()
 	{
@@ -76,6 +86,15 @@ class M_presence extends CI_Model
 			->where('id', $id)
 			->get('pegawai')
 			->num_rows();
+	}
+
+	public function get_employee($id_pegawai)
+	{
+		return $this->db
+			->select()
+			->where('id', $id_pegawai)
+			->get('pegawai')
+			->row();
 	}
 
 	public function count_presence($id_pegawai, $id_periode)

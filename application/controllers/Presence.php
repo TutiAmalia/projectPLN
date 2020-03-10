@@ -74,22 +74,39 @@ class Presence extends Admin_Controller
 
 	public function detail($id = null)
 	{
-		if ($id = null) redirect('presence/report'); 
+		if ($id == null) redirect('presence/report'); 
 		$id_pegawai_raw = base64_decode(urldecode($id));
-		$id_pegawai = preg_replace('/%s/', self::$key, $id_pegawai_raw);
+		$id_pegawai = preg_replace(sprintf('/%s/', self::$key),'', $id_pegawai_raw);
 		$id_periode = $this->session->userdata('id_periode');
-		$periode = $this->presence->get_periode();
-		if ($this->presence->is_employee($id_pegawai) == 1) {
-			$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
-			$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
+		$periode = $this->presence->get_periode($id_periode);
+		$daily = array();
+		if ($this->presence->is_employee($id_pegawai)) {
+			$data['employee'] = $this->presence->get_employee($id_pegawai);
+			$kehadiran = $this->presence->count_presence($id_pegawai, $id_periode);
+			$keterlambatan = $this->presence->count_delay($id_pegawai, $id_periode);
 			$weekdays = count_weekdays($periode->bulan, $periode->tahun);
-			$permits = $this->presence->count_permit($id, $periode->bulan);
-			$holidays = $this->presence->count_holiday($periode->bulan);
-			$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
-			$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
-			$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
-			$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
+			$cuti = $this->presence->count_permit($id_pegawai, $id_periode);
+			$holidays = $this->presence->count_holiday($id_periode);
+			$absences = (int) $weekdays - $kehadiran - $cuti - $holidays;
+			$ketidakhadiran = $absences >= 0 ? $absences : 0;
+			$stat = $kehadiran / ($weekdays - $holidays) * 100;
+			$persentase_kehadiran = $stat <= 100 ? $stat : 100;
+			$daily_report = $this->presence->get_daily_report($id_pegawai, $id_periode);
+			for ($i=0; $i < count($daily_report); $i++) { 
+				$daily['date'][] = $daily_report[$i]['tanggal'];
+				$daily['time_in'][] = $daily_report[$i]['jam_masuk'];
+			}
+			$data['label_bulanan'] = array('Hadir', 'Tidak Hadir', 'Terlambat', 'Cuti');
+			$data['warna_bulanan'] = array('#009954', '#F56954', '#F39C12', '#00C0EF');
+			$data['data_bulanan'] = array($kehadiran, $ketidakhadiran, $keterlambatan, $cuti);
+			$data['date'] = $daily ? $daily['date']: null;
+			$data['time_in'] = $daily ? $daily['time_in']: null;
+		} else {
+			redirect('presence/report');
 		}
+		$data['title'] = 'Detail Kehadiran Pegawai';
+		$data['page'] = 'admin/pages/presence/detail';
+		$this->load->view('admin/index', $data);
 	}
 
 	private function _do_import($id_periode)
@@ -157,8 +174,8 @@ class Presence extends Admin_Controller
 					$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
 					$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
 					$weekdays = count_weekdays($periode->bulan, $periode->tahun);
-					$permits = $this->presence->count_permit($id, $periode->bulan);
-					$holidays = $this->presence->count_holiday($periode->bulan);
+					$permits = $this->presence->count_permit($id, $id_periode);
+					$holidays = $this->presence->count_holiday($id_periode);
 					$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
 					$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
 					$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
