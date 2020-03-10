@@ -10,6 +10,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="shortcut icon" href="<?= base_url('assets/adminlte/img/logo_pln.png') ?>">
 	<?php $this->load->view('admin/component/source_css') ?>
+	<script>
+		const ASSET_PATH = '<?= base_url('assets') ?>';
+	</script>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed control-sidebar-slide-open">
