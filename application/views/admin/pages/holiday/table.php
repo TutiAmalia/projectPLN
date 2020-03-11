@@ -50,8 +50,7 @@
 									<td><?= $data->tahun ?></td>
 									<td><?= $data->keterangan ?></td>
 									<td width="250">
-										<a href="<?= site_url('holiday/edit/'.$data->id) ?>"
-											class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+										<a href="<?= site_url('holiday/edit/'.$data->id) ?>" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
 										<a href="<?= site_url('holiday/delete/'.$data->id) ?>" class="btn btn-danger btn-sm delete-btn"><i class="fas fa-trash"></i> Hapus</a>
 									</td>
 								</tr>

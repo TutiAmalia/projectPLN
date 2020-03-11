@@ -101,6 +101,7 @@ class Presence extends Admin_Controller
 			$data['data_bulanan'] = array($kehadiran, $ketidakhadiran, $keterlambatan, $cuti);
 			$data['date'] = $daily ? $daily['date']: null;
 			$data['time_in'] = $daily ? $daily['time_in']: null;
+			$data['periode'] = $periode;
 		} else {
 			redirect('presence/report');
 		}

@@ -30,6 +30,10 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
+					<div class="card-header">
+						<a href="<?= site_url('presence/report') ?>"><i class="fas fa-arrow-left"></i>
+							Kembali</a>
+					</div>
 					<div class="card-body row">
 						<div class="col-md-6">
 							<!-- DONUT CHART -->
@@ -50,7 +54,23 @@
                     <tr>
                       <td>Status Pegawai</td>
                       <td><?= $employee->jenis == 1 ? 'Pegawai' : 'Non-pegawai' ?></td>
-                    </tr>
+					</tr>
+					<tr>
+						<td>Periode</td>
+						<td><?= get_month_name($periode->bulan)." ".$periode->tahun ?></td>
+					</tr>
+					<tr>
+						<td>Hadir</td>
+						<td><?= $data_bulanan[0] ?> kali</td>
+					</tr>
+					<tr>
+						<td>Terlambat</td>
+						<td><?= $data_bulanan[2] ?> kali</td>
+					</tr>
+					<tr>
+						<td>Tidak Hadir</td>
+						<td><?= $data_bulanan[1]?> kali</td>
+					</tr>
                   </table>
 								</div>
 								<!-- /.card-body -->
