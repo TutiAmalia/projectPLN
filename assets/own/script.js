@@ -28,15 +28,24 @@ $(function () {
 	}
 	if ($('#rekap-harian').length) {
 		const rekapHarianCanvas = $('#rekap-harian').get(0).getContext('2d');
-		const data = TANGGAL_HARIAN.map((tanggal, index) => ({
-			x: tanggal,
-			y: moment(`2020-02-01 ${JAM_HARIAN[index]}`).valueOf()
-		}));
+		let dataKeterlambatan = [];
+		JAM_HARIAN.forEach((val, index) => {
+			let ontime = moment('2020-02-01 08:00:00');
+			let timeIn = moment(`2020-02-01 ${val}`);
+			if (timeIn.isAfter(ontime)) {
+				let timeDiff = moment.utc(moment.duration(moment(timeIn).diff(moment(ontime))).asMilliseconds()).format('HH:mm');
+				let output = moment(`2020-02-01 ${timeDiff}`).valueOf();
+				dataKeterlambatan.push(output);
+			} else {
+				let output = moment('2020-02-01 00:00:00').valueOf();
+				dataKeterlambatan.push(output);
+			}
+		});
 		const dataHarian = {
 			labels: TANGGAL_HARIAN,
 			datasets: [{
-				data: data,
-				label: 'Jam Masuk',
+				data: dataKeterlambatan,
+				label: 'Durasi Keterlambatan',
 				backgroundColor: 'rgba(60,141,188,0.9)',
 				borderColor: 'rgba(60,141,188,0.8)',
 				pointRadius: false,
@@ -55,16 +64,13 @@ $(function () {
 					type: 'linear',
 					position: 'left',
 					ticks: {
-						min: moment('2020-02-01 05:00:00').valueOf(),
-						max: moment('2020-02-01 17:59:59').valueOf(),
+						min: moment('2020-02-01 00:00:00').valueOf(),
+						max: moment('2020-02-01 12:30:00').valueOf(),
 						stepSize: 3.6e+6,
 						beginAtZero: false,
 						callback: value => {
 							let date = moment(value);
-							if (date.diff(moment('2020-02-01 18:00:00'), 'minute') === 0) {
-								return null;
-							}
-							return date.format('HH:mm:ss');
+							return date.format('HH:mm');
 						}
 					}
 				}]
@@ -73,10 +79,8 @@ $(function () {
 				callbacks: {
 					label: function (tooltipItem, data) {
 						let date = moment(tooltipItem.yLabel);
-						if (date.diff(moment('2020-02-01 18:00:00'), 'minute') === 0) {
-							return null;
-						}
-						return date.format('HH:mm:ss');
+						let output = `${date.format('HH')} jam ${date.format('mm')} menit`;
+						return output;
 					}
 				}
 			}
@@ -88,6 +92,7 @@ $(function () {
 		});
 	}
 });
+
 $('.delete-btn').click(function (event) {
 	event.preventDefault();
 	const url = $(this).attr('href');
