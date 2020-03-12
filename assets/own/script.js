@@ -64,8 +64,6 @@ $(function () {
 					type: 'linear',
 					position: 'left',
 					ticks: {
-						min: moment('2020-02-01 00:00:00').valueOf(),
-						max: moment('2020-02-01 12:30:00').valueOf(),
 						stepSize: 3.6e+6,
 						beginAtZero: false,
 						callback: value => {
