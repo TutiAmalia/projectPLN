@@ -46,19 +46,37 @@ $(function () {
 			datasets: [{
 				data: dataKeterlambatan,
 				label: 'Durasi Keterlambatan',
-				backgroundColor: 'rgba(60,141,188,0.9)',
-				borderColor: 'rgba(60,141,188,0.8)',
-				pointRadius: false,
-				pointColor: '#3b8bba',
-				pointStrokeColor: 'rgba(60,141,188,1)',
-				pointHighlightFill: '#fff',
-				pointHighlightStroke: 'rgba(60,141,188,1)',
+				backgroundColor: 'rgba(60,141,188,0.9)'
 			}]
 		};
 		const barOptions = {
 			maintainAspectRatio: false,
 			responsive: true,
-			datasetFill: false,
+			hover: {
+				animationDuration: 0
+			},
+			animation: {
+				duration: 1,
+				onComplete: function () {
+					let chartInstance = this.chart,
+						ctx = chartInstance.ctx;
+
+					ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+					ctx.textAlign = 'center';
+					ctx.textBaseline = 'bottom';
+
+					this.data.datasets.forEach(function (dataset, i) {
+						let meta = chartInstance.controller.getDatasetMeta(i);
+						meta.data.forEach(function (bar, index) {
+							let data = moment(dataset.data[index]).format('HH:mm');
+							const ontime = '00:00';
+							if (data != ontime) {
+								ctx.fillText(data, bar._model.x, bar._model.y - 5);
+							}
+						});
+					});
+				}
+			},
 			scales: {
 				yAxes: [{
 					type: 'linear',
@@ -81,7 +99,8 @@ $(function () {
 						let output = `${date.format('HH')} jam ${date.format('mm')} menit`;
 						return output;
 					}
-				}
+				},
+				enabled: false
 			}
 		};
 		const rekapHarian = new Chart(rekapHarianCanvas, {
