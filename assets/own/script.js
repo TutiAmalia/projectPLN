@@ -140,7 +140,7 @@ $('#datatable').DataTable({
 	responsive: true
 });
 $('#print_btn').on('click', function () {
-	
+
 	const pdf = new jsPDF({
 		orientation: 'landscape',
 		size: 'a4'
@@ -154,14 +154,16 @@ $('#print_btn').on('click', function () {
 	pdf.autoTable({
 		html: '#detail',
 		startY: 35,
-		margin: {left: 20},
+		margin: {
+			left: 20
+		},
 		tableWidth: 100,
 	});
 	const canvas = $("#rekap-harian").get(0);
 	const canvas_img = canvas.toDataURL("image/png", 1.0);
-	const imgProps= pdf.getImageProperties(canvas_img);
-  const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
-  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+	const imgProps = pdf.getImageProperties(canvas_img);
+	const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
+	const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 	pdf.addImage(canvas_img, 'png', 20, pdf.autoTable.previous.finalY, pdfWidth, pdfHeight);
 	pdf.save(FILE_NAME);
 });
