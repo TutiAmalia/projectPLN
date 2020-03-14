@@ -33,6 +33,7 @@
 					<div class="card-header">
 						<a href="<?= site_url('presence/report') ?>"><i class="fas fa-arrow-left"></i>
 							Kembali</a>
+						<button id="print_btn" target="_blank" class="btn btn-info"><i class="fas fa-save"></i> Save Data</a>
 					</div>
 					<div class="card-body row">
 						<div class="col-md-6">
@@ -117,5 +118,9 @@
 			</div>
 		</div>
 		<!-- /.row -->
+		
 	</div><!-- /.container-fluid -->
+	<script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
+	<script src="<?= base_url('assets/plugins/jspdf/jspdf.min.js') ?>"></script>
+	<script src="<?= base_url('assets/plugins/jspdf/jspdf.autotable.min.js') ?>"></script>
 </section>
