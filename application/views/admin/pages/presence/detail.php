@@ -1,11 +1,13 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
 
 <script>
-  const LABEL_BULANAN = <?= json_encode($label_bulanan) ?>;
-  const WARNA_BULANAN = <?= json_encode($warna_bulanan) ?>;
-  const DATA_BULANAN = <?= json_encode($data_bulanan) ?>;
-  const TANGGAL_HARIAN = <?= json_encode($date) ?>;
-  const JAM_HARIAN = <?= json_encode($time_in) ?>;
+	const LABEL_BULANAN = <?= json_encode($label_bulanan) ?>;
+	const WARNA_BULANAN = <?= json_encode($warna_bulanan) ?>;
+	const DATA_BULANAN = <?= json_encode($data_bulanan) ?>;
+	const TANGGAL_HARIAN = <?= json_encode($date) ?>;
+	const JAM_HARIAN = <?= json_encode($time_in) ?>;
+	const PERIOD = '<?= get_month_name($periode->bulan)." ".$periode->tahun ?>';
+	const FILE_NAME = `detail_<?= $employee->id ?>_<?= $periode->tahun ?>_<?=$periode->bulan?>.pdf`;
 </script>
 <!-- Content Header (Page header) -->
 <section class="content-header">
@@ -30,10 +32,10 @@
 		<div class="row">
 			<div class="col-12">
 				<div class="card">
-					<div class="card-header">
+					<div class="card-header d-flex justify-content-between align-items-center">
 						<a href="<?= site_url('presence/report') ?>"><i class="fas fa-arrow-left"></i>
-							Kembali</a>
-						<button id="print_btn" target="_blank" class="btn btn-info"><i class="fas fa-save"></i> Save Data</a>
+						Kembali</a>
+						<button id="print_btn" target="_blank" class="btn btn-info btn-sm"><i class="fas fa-download"></i> Unduh Data</button>
 					</div>
 					<div class="card-body row">
 						<div class="col-md-6">
@@ -42,37 +44,37 @@
 								<div class="card-header">
 									<h3 class="card-title"><strong class="text-muted">Data Pegawai</strong></h3>
 								</div>
-                <div class="card-body" style="min-height:250px">
-                  <table class="table table-bordered">
-                  <tr>
-                      <td>Kode Pegawai</td>
-                      <td><?= $employee->id ?></td>
-                    </tr>
-                    <tr>
-                      <td>Nama Pegawai</td>
-                      <td><?= $employee->nama ?></td>
-                    </tr>
-                    <tr>
-                      <td>Status Pegawai</td>
-                      <td><?= $employee->jenis == 1 ? 'Pegawai' : 'Non-pegawai' ?></td>
-					</tr>
-					<tr>
-						<td>Periode</td>
-						<td><?= get_month_name($periode->bulan)." ".$periode->tahun ?></td>
-					</tr>
-					<tr>
-						<td>Hadir</td>
-						<td><?= $data_bulanan[0] ?> kali</td>
-					</tr>
-					<tr>
-						<td>Terlambat</td>
-						<td><?= $data_bulanan[2] ?> kali</td>
-					</tr>
-					<tr>
-						<td>Tidak Hadir</td>
-						<td><?= $data_bulanan[1]?> kali</td>
-					</tr>
-                  </table>
+								<div class="card-body" style="min-height:250px">
+									<table class="table table-bordered" id="detail">
+										<tr>
+											<th>Kode Pegawai</th>
+											<td><?= $employee->id ?></td>
+										</tr>
+										<tr>
+											<th>Nama Pegawai</th>
+											<td><?= ucwords($employee->nama) ?></td>
+										</tr>
+										<tr>
+											<th>Status Pegawai</th>
+											<td><?= $employee->jenis == 1 ? 'Pegawai' : 'Non-pegawai' ?></td>
+										</tr>
+										<tr>
+											<th>Periode</th>
+											<td><?= get_month_name($periode->bulan)." ".$periode->tahun ?></td>
+										</tr>
+										<tr>
+											<th>Hadir</th>
+											<td><?= $data_bulanan[0] ?> kali</td>
+										</tr>
+										<tr>
+											<th>Terlambat</th>
+											<td><?= $data_bulanan[2] ?> kali</td>
+										</tr>
+										<tr>
+											<th>Tidak Hadir</th>
+											<td><?= $data_bulanan[1]?> kali</td>
+										</tr>
+									</table>
 								</div>
 								<!-- /.card-body -->
 							</div>
@@ -82,11 +84,11 @@
 							<!-- DONUT CHART -->
 							<div class="card card-warning card-outline">
 								<div class="card-header">
-									<h3 class="card-title"><strong class="text-muted" >Rekap Bulanan</strong></h3>
+									<h3 class="card-title"><strong class="text-muted">Rekap Bulanan</strong></h3>
 								</div>
 								<div class="card-body">
 									<canvas id="rekap-bulanan"
-                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+										style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 								</div>
 								<!-- /.card-body -->
 							</div>
@@ -118,9 +120,5 @@
 			</div>
 		</div>
 		<!-- /.row -->
-		
-	</div><!-- /.container-fluid -->
-	<script src="<?= base_url('assets/plugins/jquery/jquery.min.js') ?>"></script>
-	<script src="<?= base_url('assets/plugins/jspdf/jspdf.min.js') ?>"></script>
-	<script src="<?= base_url('assets/plugins/jspdf/jspdf.autotable.min.js') ?>"></script>
+	
 </section>

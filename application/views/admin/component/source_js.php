@@ -7,6 +7,7 @@
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
 	$.widget.bridge('uibutton', $.ui.button)
+
 </script>
 <!-- Bootstrap 4 -->
 <script src="<?= base_url('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
@@ -39,6 +40,9 @@
 <script src="<?= base_url('assets/plugins/sweetalert2/sweetalert2.min.js')?>"></script>
 <!-- HigChart -->
 <script src="<?= base_url('assets/plugins/chart.js/Chart.min.js')?>"></script>
+<!-- JSPDF -->
+<script src="<?= base_url('assets/plugins/jspdf/jspdf.min.js') ?>"></script>
+<script src="<?= base_url('assets/plugins/jspdf/jspdf.autotable.min.js') ?>"></script>
 <!-- AdminLTE App -->
 <script src="<?= base_url('assets/adminlte/js/adminlte.js') ?>"></script>
 <script src="<?= base_url('assets/own/script.js') ?>"></script>

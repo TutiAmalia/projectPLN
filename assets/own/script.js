@@ -139,29 +139,29 @@ $('#datatable').DataTable({
 	ordering: false,
 	responsive: true
 });
-
-// const pdf = new jsPDF();
-// 			pdf.setFontSize(18);
-// 			pdf.setFontStyle('bold');
-// 			pdf.text('Laporan Hadir Bulanan Pegawai', 14, 22);
-// 			pdf.setFontSize(12);
-// 			pdf.setFontStyle('normal');
-// 			pdf.text(PERIOD, 14, 30);
-// 			pdf.autoTable({
-// 				html: '#content',
-// 				startY: 45
-// 			});
-// 			pdf.save(FILE_NAME);
-// 			$(document).ready(function () {
-// 				window.close();
-
-$('#print_btn').on('click', function() {
-	var canvas = document.querySelector("#rekap-harian");
-    var canvas_img = canvas.toDataURL("image/png",1.0); //JPEG will not match background color
-    var pdf = new jsPDF(); //orientation, units, page size
-    pdf.addImage(canvas_img, 'png', 50, 10, 50, 20); //image, type, padding left, padding top, width, height
-    pdf.autoPrint(); //print window automatically opened with pdf
-    var blob = pdf.output("bloburl");
-    window.open(blob);
-   
+$('#print_btn').on('click', function () {
+	
+	const pdf = new jsPDF({
+		orientation: 'landscape',
+		size: 'a4'
+	});
+	pdf.setFontSize(18);
+	pdf.setFontStyle('bold');
+	pdf.text('Rekap Harian Pegawai', 20, 22);
+	pdf.setFontSize(12);
+	pdf.setFontStyle('normal');
+	pdf.text(PERIOD, 20, 30);
+	pdf.autoTable({
+		html: '#detail',
+		startY: 35,
+		margin: {left: 20},
+		tableWidth: 100,
+	});
+	const canvas = $("#rekap-harian").get(0);
+	const canvas_img = canvas.toDataURL("image/png", 1.0);
+	const imgProps= pdf.getImageProperties(canvas_img);
+  const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
+  const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+	pdf.addImage(canvas_img, 'png', 20, pdf.autoTable.previous.finalY, pdfWidth, pdfHeight);
+	pdf.save(FILE_NAME);
 });
