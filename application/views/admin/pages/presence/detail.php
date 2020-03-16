@@ -35,7 +35,7 @@
 					<div class="card-header d-flex justify-content-between align-items-center">
 						<a href="<?= site_url('presence/report') ?>"><i class="fas fa-arrow-left"></i>
 						Kembali</a>
-						<button id="print_btn" target="_blank" class="btn btn-info btn-sm"><i class="fas fa-download"></i> Unduh Data</button>
+						<button id="print_btn" target="_blank" class="btn btn-info btn-sm d-block mr-0 ml-auto"><i class="fas fa-download"></i> Unduh Data</button>
 					</div>
 					<div class="card-body row">
 						<div class="col-md-6">
