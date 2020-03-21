@@ -30,7 +30,10 @@ $(function () {
 		const rekapHarianCanvas = $('#rekap-harian').get(0).getContext('2d');
 		let dataKeterlambatan = [];
 		JAM_HARIAN.forEach((val, index) => {
-			let ontime = moment('2020-02-01 08:00:00');
+			let date = new Date(`${TAHUN}-${BULAN}-${TANGGAL_HARIAN[index]}`);
+			let day = date.getDay();
+			let ontime = day != 5 ? moment('2020-02-01 08:00:00') : moment('2020-02-01 07:30:00');
+			
 			let timeIn = moment(`2020-02-01 ${val}`);
 			if (timeIn.isAfter(ontime)) {
 				let timeDiff = moment.utc(moment.duration(moment(timeIn).diff(moment(ontime))).asMilliseconds()).format('HH:mm');

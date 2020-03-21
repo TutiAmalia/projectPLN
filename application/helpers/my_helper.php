@@ -23,3 +23,12 @@ if (!function_exists('count_weekdays')) {
 		return $count;
 	}
 }
+
+if (!function_exists('is_friday')) {
+	function is_friday($date, $month, $year)
+	{
+		$date = "${year}-${month}-${date}";
+		$day = date('N', strtotime($date));
+		return ($day == 5);
+	}
+}

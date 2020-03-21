@@ -6,6 +6,8 @@
 	const DATA_BULANAN = <?= json_encode($data_bulanan) ?>;
 	const TANGGAL_HARIAN = <?= json_encode($date) ?>;
 	const JAM_HARIAN = <?= json_encode($time_in) ?>;
+	const BULAN = <?= $periode->bulan ?>;
+	const TAHUN = <?= $periode->tahun ?>;
 	const PERIOD = '<?= get_month_name($periode->bulan)." ".$periode->tahun ?>';
 	const FILE_NAME = `detail_<?= $employee->id ?>_<?= $periode->tahun ?>_<?=$periode->bulan?>.pdf`;
 </script>
