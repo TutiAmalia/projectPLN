@@ -37,11 +37,13 @@ class M_vacation extends CI_Model
 
     public function get_all_data()
     {
+        $id_periode = $this->session->userdata('id_periode');
         return $this->db
                 ->select('a.bulan, a.tahun,b.id, b.tanggal, b.keterangan, b.id_pegawai, c.nama, c.jenis')
                 ->from('periode a, perizinan b, pegawai c')
                 ->where('a.id = b.id_periode')
                 ->where('c.id = b.id_pegawai')
+                ->where('b.id_periode', $id_periode)
                 ->get()
                 ->result();
     }
@@ -53,6 +55,17 @@ class M_vacation extends CI_Model
             ->get('periode')
             ->result();
     }
+
+    public function get_last_period()
+	{
+		return $this->db
+			->select('id')
+			->order_by('id', 'DESC')
+			->limit(1)
+			->get('periode')
+			->row()
+			->id;
+	}
 
     public function get_employee()
     {

@@ -10,13 +10,32 @@ class Vacation extends Admin_Controller
         $this->load->helper('form');
     }
 
+    public function clear($page = '')
+	{
+		$this->session->unset_userdata('id_periode');
+		redirect("vacation/{$page}");
+	}
+
     public function index()
     {
         $data['title'] = 'Perizinan';
         $data['page'] = 'admin/pages/vacation/table';
         $data['vacation'] = $this->vacation->get_all_data();
+        $data['periode'] = $this->vacation->get_periode();
+		$id_periode = $this->vacation->get_last_period();
+		if (!$this->session->userdata('id_periode')) {
+			$this->session->set_userdata('id_periode', $id_periode);
+		}
+		$data['id_periode'] = $this->session->userdata('id_periode');
         $this->load->view('admin/index', $data);
     }
+
+    public function select_periode()
+	{
+		$id_periode = $this->input->post('id_periode');
+		$this->session->set_userdata('id_periode', $id_periode);
+		redirect('vacation');
+	}
 
     public function add()
     {
