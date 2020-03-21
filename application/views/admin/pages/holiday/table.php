@@ -22,11 +22,22 @@
 	<div class="row">
 		<div class="col-12">
 			<div class="card">
-
-				<div class="card-header">
+			<form role="form"" action=" <?= site_url('holiday/select_periode') ?>" method="post">
+				<div class="card-header d-flex justify-content-between align-items-center">
 					<a href="<?=site_url('holiday/add') ?>" ><i class="fas fa-plus"></i> Tambahkan Hari Libur</a>
+					<div class="col-lg-3 d-block mr-0 ml-auto">
+						<select class="custom-select select2bs4 form-control-sm" name="id_periode"
+							onchange="if(this.value != '') { this.form.submit(); }">
+							<option value="">Pilih Periode</option>
+							<?php foreach($periode as $data) : ?>
+							<option value="<?= $data->id ?>" <?php $id_periode == $data->id and print('selected') ?>>
+								<?= get_month_name($data->bulan)." ".$data->tahun ?>
+							</option>
+							<?php endforeach ?>
+						</select>
+					</div>
 				</div>
-
+			</form>
 				<!-- /.card-header -->
 				<div class="card-body table-responsive">
 					<table id="datatable" class="table table-bordered table-striped" width="100%" cellspacing="0">

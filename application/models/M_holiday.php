@@ -32,10 +32,12 @@ class M_holiday extends CI_Model
 	
 	public function get_all_data()
 	{
+		$id_periode = $this->session->userdata('id_periode');
 		return $this->db
 			->select('a.bulan, a.tahun, b.id, b.tanggal, b.keterangan')
 			->from('periode a, hari_libur b')
 			->where('a.id = b.id_periode')
+			->where('b.id_periode', $id_periode)
 			->get()
 			->result();
 	}
@@ -46,6 +48,17 @@ class M_holiday extends CI_Model
 			->select()
 			->get('periode')
 			->result();
+	}
+
+	public function get_last_period()
+	{
+		return $this->db
+			->select('id')
+			->order_by('id', 'DESC')
+			->limit(1)
+			->get('periode')
+			->row()
+			->id;
 	}
 
 	public function get_holiday_by_periode($id_periode)
