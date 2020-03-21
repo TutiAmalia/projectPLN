@@ -11,12 +11,32 @@ class Holiday extends Admin_Controller
 		$this->load->helper('form');
 	}
 
+	public function clear($page = '')
+	{
+		$this->session->unset_userdata('id_periode');
+		redirect("holiday/{$page}");
+	}
+
 	public function index()
 	{
 		$data['title'] = 'Hari Libur';
 		$data['page'] = 'admin/pages/holiday/table';
 		$data['holiday'] = $this->holiday->get_all_data();
-    	$this->load->view('admin/index', $data);
+		$data['periode'] = $this->holiday->get_periode();
+		$id_periode = $this->holiday->get_last_period();
+		if (!$this->session->userdata('id_periode')) {
+			$this->session->set_userdata('id_periode', $id_periode);
+		}
+		$data['id_periode'] = $this->session->userdata('id_periode');
+
+		$this->load->view('admin/index', $data);
+	}
+
+	public function select_periode()
+	{
+		$id_periode = $this->input->post('id_periode');
+		$this->session->set_userdata('id_periode', $id_periode);
+		redirect('holiday');
 	}
 
 	public function add(){
