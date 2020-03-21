@@ -33,7 +33,6 @@ $(function () {
 			let date = new Date(`${TAHUN}-${BULAN}-${TANGGAL_HARIAN[index]}`);
 			let day = date.getDay();
 			let ontime = day != 5 ? moment('2020-02-01 08:00:00') : moment('2020-02-01 07:30:00');
-			
 			let timeIn = moment(`2020-02-01 ${val}`);
 			if (timeIn.isAfter(ontime)) {
 				let timeDiff = moment.utc(moment.duration(moment(timeIn).diff(moment(ontime))).asMilliseconds()).format('HH:mm');
@@ -162,11 +161,29 @@ $('#print_btn').on('click', function () {
 		},
 		tableWidth: 100,
 	});
+	pdf.autoTable({
+		theme: 'striped',
+		html: '#checkin',
+		startY: pdf.autoTable.previous.finalY + 10,
+		margin: {
+			left: 20
+		},
+		styles: {
+			lineWidth: 1,
+
+		},
+		rowStyles: {
+			0: {fontStyle: 'bold'}
+		},
+		columnStyles: {
+      0: {fontStyle: 'bold' }
+    }
+	})
 	const canvas = $("#rekap-harian").get(0);
 	const canvas_img = canvas.toDataURL("image/png", 1.0);
 	const imgProps = pdf.getImageProperties(canvas_img);
 	const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
 	const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-	pdf.addImage(canvas_img, 'png', 20, pdf.autoTable.previous.finalY, pdfWidth, pdfHeight);
+	pdf.addImage(canvas_img, 'png', 20, pdf.autoTable.previous.finalY + 20, pdfWidth, pdfHeight);
 	pdf.save(FILE_NAME);
 });

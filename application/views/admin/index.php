@@ -15,7 +15,7 @@
 	</script>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed control-sidebar-slide-open">
+<body class="<?php isset($min_sidebar) and print('sidebar-collapse') ?> hold-transition sidebar-mini layout-fixed control-sidebar-slide-open">
 	<div class="wrapper">
 
 		<?php $this->load->view('admin/component/top_nav') ?>

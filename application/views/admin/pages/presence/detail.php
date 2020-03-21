@@ -104,6 +104,36 @@
 				<div class="card card-info card-outline">
 					<div class="card-header">
 						<h3 class="card-title"><strong>Rekap harian</strong></h3>
+						<div class="card-tools">
+							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+							</button>
+						</div>
+					</div>
+					<div class="card-body">
+						<table class="table table-bordered table-striped" id="checkin">
+							<tr>
+								<th class="p-2">Tgl</th>
+								<?php foreach($date as $data) : ?>
+									<td class="p-1 text-center text-bold"><?= $data ?></td>
+								<?php endforeach ?>
+							</tr>
+							<tr>
+								<th class="p-2">Jam Masuk</th>
+								<?php foreach($time_in as $index => $data) : ?>
+									<td class="p-1 text-center"><?= date_format(date_create($data), 'H:i') ?></td>
+								<?php endforeach ?>
+							</tr>
+						</table>
+					</div>
+					<!-- /.card-body -->
+				</div>
+				<!-- /.card -->
+			</div>
+			<div class="col-12">
+				<!-- BAR CHART -->
+				<div class="card card-info card-outline">
+					<div class="card-header">
+						<h3 class="card-title"><strong>Rekap keterlambatan</strong></h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
@@ -113,7 +143,7 @@
 					<div class="card-body">
 						<div class="chart">
 							<canvas id="rekap-harian"
-								style="min-height: 250px; height: 400px; max-height: 400px; max-width: 100%;"></canvas>
+								style="min-height: 250px; max-height: 700px; max-width: 100%;"></canvas>
 						</div>
 					</div>
 					<!-- /.card-body -->

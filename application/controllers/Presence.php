@@ -105,6 +105,7 @@ class Presence extends Admin_Controller
 		} else {
 			redirect('presence/report');
 		}
+		$data['min_sidebar'] = 1;
 		$data['title'] = 'Detail Kehadiran Pegawai';
 		$data['page'] = 'admin/pages/presence/detail';
 		$this->load->view('admin/index', $data);
