@@ -58,7 +58,7 @@
 										</tr>
 										<tr>
 											<th>Status Pegawai</th>
-											<td><?= $employee->jenis == 1 ? 'Pegawai' : 'Non-pegawai' ?></td>
+											<td><?= $employee->jenis == 1 ? 'Pegawai shift' : 'Pegawai non-shift' ?></td>
 										</tr>
 										<tr>
 											<th>Periode</th>

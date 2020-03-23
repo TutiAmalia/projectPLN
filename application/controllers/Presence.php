@@ -152,20 +152,26 @@ class Presence extends Admin_Controller
 			for ($i=5; $i <= $rows; $i++) {
 				if ($i % 2 == 1) {
 					if (!empty($data->val($i, 3))) {
-						$employee[] = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
+						$record = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
+						if ($this->presence->is_employee($record)) {
+							$employee[] = $record;
+						}
 					}
 				}
-				$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
-				for ($j=1; $j <= $days; $j++) { 
-					if ($i % 2 == 1) {
-						continue;
-					}
-					if (!empty($data->val($i, $j))) {
-						$log_temp['id_pegawai'] = $employee[$i /2 - 3];
-						$log_temp['id_periode'] = $id_periode;
-						$log_temp['tanggal'] = (int) $j; 
-						$log_temp['jam_masuk'] = trim(preg_split('/\r\n|\r|\n/', $data->val($i, $j))[0]);	
-						array_push($log, $log_temp);
+
+				if ($this->presence->is_employee($record)) {
+					$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
+					for ($j=1; $j <= $days; $j++) { 
+						if ($i % 2 == 1) {
+							continue;
+						}
+						if (!empty($data->val($i, $j))) {
+							$log_temp['id_pegawai'] = $record;
+							$log_temp['id_periode'] = $id_periode;
+							$log_temp['tanggal'] = (int) $j; 
+							$log_temp['jam_masuk'] = trim(preg_split('/\r\n|\r|\n/', $data->val($i, $j))[0]);	
+							array_push($log, $log_temp);
+						}
 					}
 				}
 			}
