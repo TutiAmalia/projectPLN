@@ -50,6 +50,7 @@
 								<th style="width: 20px">No</th>
 								<th>Kode Pegawai</th>
 								<th>Nama</th>
+								<th>Status</th>
 								<th>Hadir</th>
 								<th>Terlambat</th>
 								<th>Tidak hadir</th>
@@ -64,6 +65,7 @@
 								<td><?= $no ?></td>
 								<td><?= $data->id_pegawai ?></td>
 								<td><?= ucwords($data->nama) ?></td>
+								<td><?= $data->jenis == 1 ? 'shift' : 'non-shift' ?></td>
 								<td><?= $data->kehadiran ?></td>
 								<td><?= $data->keterlambatan ?></td>
 								<td><?= $data->ketidakhadiran ?></td>

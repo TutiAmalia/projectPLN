@@ -42,7 +42,7 @@ class M_presence extends CI_Model
 	{
 		$id_periode = $this->session->userdata('id_periode');
 		return $this->db
-			->select('a.id, a.nama, b.*')
+			->select('a.id, a.nama, a.jenis, b.*')
 			->where('a.id = b.id_pegawai')
 			->where('b.id_periode', $id_periode)
 			->from('pegawai a, presensi b')

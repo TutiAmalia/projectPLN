@@ -47,18 +47,36 @@
 							</div>
 						</div>
 
+						<div class="form-group col-lg-9 row">
+							<label for="nama">Sub Area</label>
+							<input class="form-control <?php form_error('nama_subarea') and print('is-invalid') ?>" type="text" name="nama_subarea"
+								value="<?= set_value('nama_subarea') ?>" />
+							<div class="invalid-feedback">
+								<?= form_error('nama_subarea') ?>
+							</div>
+						</div>
+
+						<div class="form-group col-lg-9 row">
+							<label for="nama">Posisi</label>
+							<input class="form-control <?php form_error('nama_posisi') and print('is-invalid') ?>" type="text" name="nama_posisi"
+								value="<?= set_value('nama_posisi') ?>" />
+							<div class="invalid-feedback">
+								<?= form_error('nama_posisi') ?>
+							</div>
+						</div>
+
 						<div class="form-group">
 							<label for="">Status</label>
 							<div class="custom-controls-stacked d-block">
 								<div class="custom-control custom-radio">
 									<input class="custom-control-input <?php form_error('jenis') and print('is-invalid') ?>" type="radio"
-										id="jenis1" name="jenis" value="1" <?php set_value('jenis') == 1 and print('checked') ?>>
-									<label for="jenis1" class="custom-control-label">Pegawai</label>
+										id="jenis1" name="jenis" value="0" <?php set_value('jenis') == 0 and print('checked') ?>>
+									<label for="jenis1" class="custom-control-label">Pegawai Non-shift</label>
 								</div>
 								<div class="custom-control custom-radio">
 									<input class="custom-control-input <?php form_error('jenis') and print('is-invalid') ?>" type="radio"
-										id="jenis2" name="jenis" value="2" <?php set_value('jenis') == 2 and print('checked') ?>>
-									<label for="jenis2" class="custom-control-label">Nonpegawai</label>
+										id="jenis2" name="jenis" value="1" <?php set_value('jenis') == 1 and print('checked') ?>>
+									<label for="jenis2" class="custom-control-label">Pegawai Shift</label>
 									<div class="invalid-feedback">
 										<?= form_error('jenis') ?>
 									</div>

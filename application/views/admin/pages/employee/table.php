@@ -32,6 +32,8 @@
 									<th style="width: 20px">No</th>
 									<th>Kode Pegawai</th>
 									<th>Nama</th>
+									<th>Sub Area</th>
+									<th>Posisi</th>
 									<th>Status Pegawai</th>
 									<th>Action</th>
 								</tr>
@@ -43,7 +45,9 @@
 										<td><?= $no ?></td>
 										<td><?= $data->id ?></td>
 										<td><?= ucwords($data->nama) ?></td>
-										<td><?= $data->jenis == 1 ? 'Pegawai shift' : 'Pegawai nonshift' ?></td>
+										<td><?= $data->nama_subarea?></td>
+										<td><?= $data->nama_posisi?></td>
+										<td><?= $data->jenis == 1 ? 'shift' : 'nonshift' ?></td>
 										<td width="250">
 											<a href="<?= site_url('employee/edit/'.$data->id) ?>"
 												class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
