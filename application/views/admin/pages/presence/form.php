@@ -33,6 +33,7 @@
 								<li>Apabila periode yang dipilih memiliki <strong>paling sedikit 1 hari libur</strong> pada hari kerja (bukan hari libur yang bertepatan akhir pekan) maka perlu menambahkan datanya pada menu <strong>Hari Libur</strong></li>
 								<li>Apabila ada pegawai yang mengajukan izin/cuti karena sakit atau keperluan lain pada periode yang hendak dipilih, maka harus menambahkan data izin pegawai tersebut ke menu <strong>Izin Cuti</strong></li>
 								<li>Pastikan file log presensi yang akan diunggah telah lengkap satu periode (bulanan)</li>
+								<li>Apabila terjadi <strong>Error</strong> saat proses import data, <strong>Save as File</strong> dengan format yang sama kemudian import file baru yang telah di save as</li>
 							</ul>
 						</div>
 								
