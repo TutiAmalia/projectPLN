@@ -43,7 +43,7 @@
 										<td><?= $no ?></td>
 										<td><?= $data->id ?></td>
 										<td><?= ucwords($data->nama) ?></td>
-										<td><?= $data->jenis == 1 ? 'Pegawai' : 'Nonpegawai' ?></td>
+										<td><?= $data->jenis == 1 ? 'Pegawai shift' : 'Pegawai nonshift' ?></td>
 										<td width="250">
 											<a href="<?= site_url('employee/edit/'.$data->id) ?>"
 												class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
