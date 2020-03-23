@@ -111,6 +111,12 @@
 								<p>Laporan presensi</p>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="<?= site_url('presence/clear') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and print('active') ?>">
+								<i class="fa fa-file-upload nav-icon"></i>
+								<p>Manual Import File</p>
+							</a>
+						</li>
 					</ul>
 				</li>
 			</ul>

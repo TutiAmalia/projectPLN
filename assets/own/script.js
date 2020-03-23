@@ -159,12 +159,12 @@ $('#print_btn').on('click', function () {
 		margin: {
 			left: 20
 		},
-		tableWidth: 100,
+		tableWidth: 200,
 	});
 	pdf.autoTable({
 		theme: 'striped',
 		html: '#checkin',
-		startY: pdf.autoTable.previous.finalY + 10,
+		startY: pdf.autoTable.previous.finalY + 5,
 		margin: {
 			left: 20
 		},
@@ -184,6 +184,6 @@ $('#print_btn').on('click', function () {
 	const imgProps = pdf.getImageProperties(canvas_img);
 	const pdfWidth = pdf.internal.pageSize.getWidth() - 40;
 	const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-	pdf.addImage(canvas_img, 'png', 20, pdf.autoTable.previous.finalY + 20, pdfWidth, pdfHeight);
+	pdf.addImage(canvas_img, 'png', 20, pdf.autoTable.previous.finalY + 5, pdfWidth, pdfHeight);
 	pdf.save(FILE_NAME);
 });

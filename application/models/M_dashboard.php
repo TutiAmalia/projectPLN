@@ -53,6 +53,7 @@ class M_dashboard extends CI_Model
 			->select('a.id, a.nama, b.*')
 			->where('a.id = b.id_pegawai')
 			->where('id_periode', $id_periode)
+			->where('jenis', 0)
 			->from('pegawai a, presensi b')
 			->order_by('ketidakhadiran', 'desc')
 			->order_by('keterlambatan', 'desc')
