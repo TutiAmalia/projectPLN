@@ -32,6 +32,20 @@ class Presence extends Admin_Controller
 		$this->load->view('admin/index', $data);
 	}
 
+	public function manual()
+	{
+		$data['title'] = 'Import Manual File';
+		$data['page'] = 'admin/pages/presence/form_manual';
+		$data['periode'] = $this->presence->get_all_periode();
+
+		$this->form_validation->set_rules($this->presence->rules());
+		if ($this->form_validation->run())
+			if ($this->_extract()) 
+				redirect('presence/report');
+		
+		$this->load->view('admin/index', $data);
+	}
+
 	public function report()
 	{
 		$data['title'] = 'Laporan daftar hadir bulanan pegawai';
@@ -70,20 +84,6 @@ class Presence extends Admin_Controller
 		$data['action'] = 'download';
 		$data['report'] = $this->presence->get_report();
 		$this->load->view('admin/pages/presence/pdf', $data);
-	}
-
-	public function manual()
-	{
-		$data['title'] = 'Import Manual File';
-		$data['page'] = 'admin/pages/presence/form_manual';
-		$data['periode'] = $this->presence->get_all_periode();
-
-		$this->form_validation->set_rules($this->presence->rules());
-		if ($this->form_validation->run())
-			if ($this->_extract()) 
-				redirect('presence/report');
-		
-		$this->load->view('admin/index', $data);
 	}
 
 	public function detail($id = null)
@@ -174,10 +174,11 @@ class Presence extends Admin_Controller
 		$id_periode = $post['id_periode'];
 		$periode = $this->presence->get_periode($id_periode);
 		$upload_result = $this->_do_import($id_periode);
+		$upload_result_manual = $this->_do_import_manual($id_periode);
 		$employee = array();
 		$log = array();
 		$report = array();
-		if ($upload_result) {
+		if ($upload_result && $upload_result_manual) {
 			$file_name = self::$path."{$periode->tahun}_{$periode->bulan}_log.xls";
 			$data = new Spreadsheet_Excel_Reader($file_name);
 			$rows = $data->rowcount();
@@ -227,7 +228,7 @@ class Presence extends Admin_Controller
 					return true;
 				}
 			}
-		} 
+		}
 		return false;
 	}
 

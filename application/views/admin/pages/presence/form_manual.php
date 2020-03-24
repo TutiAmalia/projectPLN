@@ -23,7 +23,7 @@
 		<div class="col-12">
 			<div class="card card-primary">
 				<!-- form start -->
-				<form role="form" action="<?= site_url('presence') ?>" method="post" enctype="multipart/form-data">
+				<form role="form" action="<?= site_url('presence/manual') ?>" method="post" enctype="multipart/form-data">
 					<div class="card-body">
 						<div class="alert alert-info alert-dismissible col-lg-9">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>

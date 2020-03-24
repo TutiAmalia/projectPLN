@@ -100,19 +100,19 @@
 					</a>
 					<ul class="nav nav-treeview">
 						<li class="nav-item">
-							<a href="<?= site_url('presence/clear') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and print('active') ?>">
+							<a href="<?= site_url('presence/clear') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and $this->uri->segment(3) == '' and print('active') ?>">
 								<i class="fa fa-file-upload nav-icon"></i>
 								<p>Import file</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('presence/clear/report') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == 'report' and print('active') ?>">
+							<a href="<?= site_url('presence/clear/report') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == 'report' and $this->uri->segment(3) == '' and print('active') ?>">
 								<i class="fa fa-file-pdf nav-icon"></i>
 								<p>Laporan presensi</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="<?= site_url('presence/clear') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == '' and print('active') ?>">
+							<a href="<?= site_url('presence/clear/manual') ?>" class="nav-link <?php $this->uri->segment(1) == 'presence' and $this->uri->segment(2) == 'report' and $this->uri->segment(3) == 'manual' and print('active') ?>">
 								<i class="fa fa-file-upload nav-icon"></i>
 								<p>Manual Import File</p>
 							</a>
