@@ -72,6 +72,20 @@ class Presence extends Admin_Controller
 		$this->load->view('admin/pages/presence/pdf', $data);
 	}
 
+	public function manual()
+	{
+		$data['title'] = 'Import Manual File';
+		$data['page'] = 'admin/pages/presence/form_manual';
+		$data['periode'] = $this->presence->get_all_periode();
+
+		$this->form_validation->set_rules($this->presence->rules());
+		if ($this->form_validation->run())
+			if ($this->_extract()) 
+				redirect('presence/report');
+		
+		$this->load->view('admin/index', $data);
+	}
+
 	public function detail($id = null)
 	{
 		if ($id == null) redirect('presence/report'); 
@@ -135,6 +149,24 @@ class Presence extends Admin_Controller
 		return false;
 	}
 
+	private function _do_import_manual($id_periode)
+	{
+		$periode = $this->presence->get_periode($id_periode);
+		$file_name = "{$periode->tahun}_{$periode->bulan}_manual_log";
+
+		$this->upload->initialize($this->presence->config($file_name));
+
+		if (is_uploaded_file($_FILES['file_excel']['tmp_name'])) {
+			if ($this->upload->do_upload('file_excel')) {
+				return true;
+				} else {
+					$this->session->set_flashdata('file_excel', $this->upload->display_errors());
+				}
+		} else {
+			$this->session->set_flashdata('file_excel',  'Pilih file log terlebih dahulu');
+		}
+		return false;
+	}
 
 	private function _extract()
 	{
