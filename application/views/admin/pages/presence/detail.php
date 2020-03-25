@@ -11,6 +11,7 @@
 	const PERIOD = '<?= get_month_name($periode->bulan)." ".$periode->tahun ?>';
 	const FILE_NAME = `detail_<?= $employee->id ?>_<?= $periode->tahun ?>_<?=$periode->bulan?>.pdf`;
 </script>
+
 <!-- Content Header (Page header) -->
 <section class="content-header">
 	<div class="container-fluid">
@@ -113,8 +114,11 @@
 					<div class="card-header">
 						<h3 class="card-title"><strong>Rekap harian</strong></h3>
 						<div class="card-tools">
-							<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+							<div class="card-header d-flex justify-content-between align-items-center">
+								<a href="<?= site_url('presence/excel/'.$id) ?>" class="btn btn-info btn-sm d-block mr-0 ml-auto"><i class="fas fa-edit"></i> Edit Data</a>
+								<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
 							</button>
+							</div>
 						</div>
 					</div>
 					<div class="card-body">

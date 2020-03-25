@@ -32,19 +32,19 @@ class Presence extends Admin_Controller
 		$this->load->view('admin/index', $data);
 	}
 
-	public function manual()
-	{
-		$data['title'] = 'Import Manual File';
-		$data['page'] = 'admin/pages/presence/form_manual';
-		$data['periode'] = $this->presence->get_all_periode();
+	// public function manual()
+	// {
+	// 	$data['title'] = 'Import Manual File';
+	// 	$data['page'] = 'admin/pages/presence/form_manual';
+	// 	$data['periode'] = $this->presence->get_all_periode();
 
-		$this->form_validation->set_rules($this->presence->rules());
-		if ($this->form_validation->run())
-			if ($this->_extract()) 
-				redirect('presence/report');
+	// 	$this->form_validation->set_rules($this->presence->rules());
+	// 	if ($this->form_validation->run())
+	// 		if ($this->_extract($upload_result, $upload_result_manual)) 
+	// 			redirect('presence/report');
 		
-		$this->load->view('admin/index', $data);
-	}
+	// 	$this->load->view('admin/index', $data);
+	// }
 
 	public function report()
 	{
@@ -86,9 +86,32 @@ class Presence extends Admin_Controller
 		$this->load->view('admin/pages/presence/pdf', $data);
 	}
 
+	public function excel($id = null)
+	{
+		$id_periode = $this->session->userdata('id_periode');
+		$data['periode'] = $this->presence->get_periode($id_periode);
+		$id_pegawai_raw = base64_decode(urldecode($id));
+		$id_pegawai = preg_replace(sprintf('/%s/', self::$key),'', $id_pegawai_raw);
+		$periode = $this->presence->get_periode($id_periode);
+		$daily = array();
+		if($this->presence->is_employee($id_pegawai)){
+			$data['employee'] = $this->presence->get_employee($id_pegawai);
+			$daily_report = $this->presence->get_daily_report($id_pegawai, $id_periode);
+			for ($i=0; $i < count($daily_report); $i++) { 
+				$tanggal = $daily_report[$i]['tanggal'];
+				$daily[$tanggal] = $daily_report[$i]['jam_masuk'];
+			}
+		$data['periode'] = $periode;
+		}
+		$data['log'] = $daily;
+		$this->load->view('admin/pages/presence/excel', $data);
+	}
+
 	public function detail($id = null)
 	{
+
 		if ($id == null) redirect('presence/report'); 
+		
 		$id_pegawai_raw = base64_decode(urldecode($id));
 		$id_pegawai = preg_replace(sprintf('/%s/', self::$key),'', $id_pegawai_raw);
 		$id_periode = $this->session->userdata('id_periode');
@@ -116,6 +139,7 @@ class Presence extends Admin_Controller
 			$data['date'] = $daily ? $daily['date']: null;
 			$data['time_in'] = $daily ? $daily['time_in']: null;
 			$data['periode'] = $periode;
+			$data['id'] = $id;
 		} else {
 			redirect('presence/report');
 		}
@@ -149,24 +173,24 @@ class Presence extends Admin_Controller
 		return false;
 	}
 
-	private function _do_import_manual($id_periode)
-	{
-		$periode = $this->presence->get_periode($id_periode);
-		$file_name = "{$periode->tahun}_{$periode->bulan}_manual_log";
+	// private function _do_import_manual($id_periode)
+	// {
+	// 	$periode = $this->presence->get_periode($id_periode);
+	// 	$file_name = "{$periode->tahun}_{$periode->bulan}_manual_log";
 
-		$this->upload->initialize($this->presence->config($file_name));
+	// 	$this->upload->initialize($this->presence->config($file_name));
 
-		if (is_uploaded_file($_FILES['file_excel']['tmp_name'])) {
-			if ($this->upload->do_upload('file_excel')) {
-				return true;
-				} else {
-					$this->session->set_flashdata('file_excel', $this->upload->display_errors());
-				}
-		} else {
-			$this->session->set_flashdata('file_excel',  'Pilih file log terlebih dahulu');
-		}
-		return false;
-	}
+	// 	if (is_uploaded_file($_FILES['file_excel']['tmp_name'])) {
+	// 		if ($this->upload->do_upload('file_excel')) {
+	// 			return true;
+	// 			} else {
+	// 				$this->session->set_flashdata('file_excel', $this->upload->display_errors());
+	// 			}
+	// 	} else {
+	// 		$this->session->set_flashdata('file_excel',  'Pilih file log terlebih dahulu');
+	// 	}
+	// 	return false;
+	// }
 
 	private function _extract()
 	{
@@ -174,11 +198,11 @@ class Presence extends Admin_Controller
 		$id_periode = $post['id_periode'];
 		$periode = $this->presence->get_periode($id_periode);
 		$upload_result = $this->_do_import($id_periode);
-		$upload_result_manual = $this->_do_import_manual($id_periode);
+		//$upload_result_manual = $this->_do_import_manual($id_periode);
 		$employee = array();
 		$log = array();
 		$report = array();
-		if ($upload_result && $upload_result_manual) {
+		if ($upload_result) {
 			$file_name = self::$path."{$periode->tahun}_{$periode->bulan}_log.xls";
 			$data = new Spreadsheet_Excel_Reader($file_name);
 			$rows = $data->rowcount();
