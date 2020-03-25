@@ -114,10 +114,9 @@
 					<div class="card-header">
 						<h3 class="card-title"><strong>Rekap harian</strong></h3>
 						<div class="card-tools">
-							<div class="card-header d-flex justify-content-between align-items-center">
+							<div class="d-flex justify-content-between align-items-center">
 								<a href="<?= site_url('presence/excel/'.$id) ?>" class="btn btn-info btn-sm d-block mr-0 ml-auto"><i class="fas fa-edit"></i> Edit Data</a>
-								<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
-							</button>
+								<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
 							</div>
 						</div>
 					</div>

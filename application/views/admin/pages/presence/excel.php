@@ -77,7 +77,7 @@
 
             <tr>
             <?php for($i = 1; $i <= 31; $i++) : ?>
-	            <td><?php array_key_exists($i, $log) and print($log[$i]) ?></td>
+                <td><?php array_key_exists($i, $log) and print(date_format(date_create($log[$i]), 'H:i'))?></td>
             <?php endfor ?>
             </tr>
         </tbody>
