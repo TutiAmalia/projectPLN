@@ -40,7 +40,7 @@ class Presence extends Admin_Controller
 
 	// 	$this->form_validation->set_rules($this->presence->rules());
 	// 	if ($this->form_validation->run())
-	// 		if ($this->_extract($upload_result, $upload_result_manual)) 
+	// 		if ($this->_extract('manual')) 
 	// 			redirect('presence/report');
 		
 	// 	$this->load->view('admin/index', $data);
@@ -176,7 +176,7 @@ class Presence extends Admin_Controller
 	// private function _do_import_manual($id_periode)
 	// {
 	// 	$periode = $this->presence->get_periode($id_periode);
-	// 	$file_name = "{$periode->tahun}_{$periode->bulan}_manual_log";
+	// 	$file_name = "{employee->id}_{$periode->tahun}_{$periode->bulan}_manual_log";
 
 	// 	$this->upload->initialize($this->presence->config($file_name));
 
@@ -198,62 +198,127 @@ class Presence extends Admin_Controller
 		$id_periode = $post['id_periode'];
 		$periode = $this->presence->get_periode($id_periode);
 		$upload_result = $this->_do_import($id_periode);
-		//$upload_result_manual = $this->_do_import_manual($id_periode);
 		$employee = array();
 		$log = array();
 		$report = array();
 		if ($upload_result) {
-			$file_name = self::$path."{$periode->tahun}_{$periode->bulan}_log.xls";
-			$data = new Spreadsheet_Excel_Reader($file_name);
-			$rows = $data->rowcount();
-			for ($i=5; $i <= $rows; $i++) {
-				if ($i % 2 == 1) {
-					if (!empty($data->val($i, 3))) {
-						$record = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
-						if ($this->presence->is_employee_nonshift($record)) {
-							$employee[] = $record;
+				$file_name = self::$path."{$periode->tahun}_{$periode->bulan}_log.xls";
+				$data = new Spreadsheet_Excel_Reader($file_name);
+				$rows = $data->rowcount();
+				for ($i=5; $i <= $rows; $i++) {
+					if ($i % 2 == 1) {
+						if (!empty($data->val($i, 3))) {
+							$record = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
+							if ($this->presence->is_employee_nonshift($record)) {
+								$employee[] = $record;
+							}
 						}
 					}
-				}
 
-				if ($this->presence->is_employee_nonshift($record)) {
-					$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
-					for ($j=1; $j <= $days; $j++) { 
-						if ($i % 2 == 1) {
-							continue;
-						}
-						if (!empty($data->val($i, $j))) {
-							$log_temp['id_pegawai'] = $record;
-							$log_temp['id_periode'] = $id_periode;
-							$log_temp['tanggal'] = (int) $j; 
-							$log_temp['jam_masuk'] = trim(preg_split('/\r\n|\r|\n/', $data->val($i, $j))[0]);	
-							array_push($log, $log_temp);
+					if ($this->presence->is_employee_nonshift($record)) {
+						$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
+						for ($j=1; $j <= $days; $j++) { 
+							if ($i % 2 == 1) {
+								continue;
+							}
+							if (!empty($data->val($i, $j))) {
+								$log_temp['id_pegawai'] = $record;
+								$log_temp['id_periode'] = $id_periode;
+								$log_temp['tanggal'] = (int) $j; 
+								$log_temp['jam_masuk'] = trim(preg_split('/\r\n|\r|\n/', $data->val($i, $j))[0]);	
+								array_push($log, $log_temp);
+							}
 						}
 					}
 				}
-			}
-			if ($this->presence->insert_log($log)) {
-				foreach ($employee as $id) {
-					$report_temp['id_pegawai'] = $id;
-					$report_temp['id_periode'] = $id_periode;
-					$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
-					$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
-					$weekdays = count_weekdays($periode->bulan, $periode->tahun);
-					$permits = $this->presence->count_permit($id, $id_periode);
-					$holidays = $this->presence->count_holiday($id_periode);
-					$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
-					$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
-					$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
-					$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
-					array_push($report, $report_temp);
+				if ($this->presence->insert_log($log)) {
+					foreach ($employee as $id) {
+						$report_temp['id_pegawai'] = $id;
+						$report_temp['id_periode'] = $id_periode;
+						$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
+						$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
+						$weekdays = count_weekdays($periode->bulan, $periode->tahun);
+						$permits = $this->presence->count_permit($id, $id_periode);
+						$holidays = $this->presence->count_holiday($id_periode);
+						$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
+						$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
+						$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
+						$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
+						array_push($report, $report_temp);
+					}
+					if ($this->presence->insert_report($report)){
+						$this->session->set_userdata('id_periode', $id_periode);
+						return true;
+					}
 				}
-				if ($this->presence->insert_report($report)){
-					$this->session->set_userdata('id_periode', $id_periode);
-					return true;
-				}
 			}
-		}
 		return false;
 	}
+
+	// private function _extract($tipe)
+	// {
+	// 	$post = $this->input->post();
+	// 	$id_periode = $post['id_periode'];
+	// 	$periode = $this->presence->get_periode($id_periode);
+	// 	$upload_result = $this->_do_import($id_periode);
+	// 	$upload_result_manual = $this->_do_import_manual($id_periode);
+	// 	$employee = array();
+	// 	$log = array();
+	// 	$report = array();
+	// 	if ($tipe == 'manual') {
+	// 		$file_name = self::$path."{employee->id}_{$periode->tahun}_{$periode->bulan}_log.xls";
+	// 		$data = new Spreadsheet_Excel_Reader($file_name);
+	// 		$rows = $data->rowcount();
+	// 		for ($i=5; $i <= $rows; $i++) {
+	// 			if ($i % 2 == 1) {
+	// 				if (!empty($data->val($i, 3))) {
+	// 					$record = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
+	// 					if ($this->presence->is_employee_nonshift($record)) {
+	// 						$employee[] = $record;
+	// 					}
+	// 				}
+	// 			}
+
+	// 			if ($this->presence->is_employee_nonshift($record)) {
+	// 				$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
+	// 				for ($j=1; $j <= $days; $j++) { 
+	// 					if ($i % 2 == 1) {
+	// 						continue;
+	// 					}
+						
+	// 					if (!empty($data->val($i, $j))) {
+	// 						$log_temp['id_pegawai'] = $record;
+	// 						$log_temp['id_periode'] = $id_periode;
+	// 						$log_temp['tanggal'] = (int) $j; 
+	// 						$log_temp['jam_masuk'] = trim(preg_split('/\r\n|\r|\n/', $data->val($i, $j))[0]);	
+	// 						array_push($log, $log_temp);
+	// 					}
+						
+	// 				}
+	// 			}
+	// 		}
+	// 		if ($this->presence->insert_log($log)) {
+	// 			foreach ($employee as $id) {
+	// 				$report_temp['id_pegawai'] = $id;
+	// 				$report_temp['id_periode'] = $id_periode;
+	// 				$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
+	// 				$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
+	// 				$weekdays = count_weekdays($periode->bulan, $periode->tahun);
+	// 				$permits = $this->presence->count_permit($id, $id_periode);
+	// 				$holidays = $this->presence->count_holiday($id_periode);
+	// 				$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
+	// 				$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
+	// 				$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
+	// 				$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
+	// 				array_push($report, $report_temp);
+	// 			}
+	// 			if ($this->presence->insert_report($report)){
+	// 				$this->session->set_userdata('id_periode', $id_periode);
+	// 				return true;
+	// 			}
+	// 		}
+	// 	}
+	// 	return false;
+	// }
 
 }
