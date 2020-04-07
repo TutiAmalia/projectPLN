@@ -1,5 +1,5 @@
 <?php 
-    $file_name = "{$employee->id}_{$periode->tahun}_{$periode->bulan}_report.xls";
+    $file_name = "{$employee->id}_{$periode->tahun}_{$periode->bulan}_manual.xls";
     header('Content-Type: application/octet-stream');
     header('Content-Disposition: attachment; filename="'.$file_name.'"');
 
