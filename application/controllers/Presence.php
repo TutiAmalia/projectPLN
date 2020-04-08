@@ -215,7 +215,7 @@ class Presence extends Admin_Controller
 			for ($i=5; $i <= $rows; $i++) {
 				if ($i % 2 == 1) {
 					if (!empty($data->val($i, 3))) {
-						$record = (int) preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
+						$record = preg_replace('/[^0-9]/u', '', $data->val($i, 3));
 						if ($this->presence->is_employee_nonshift($record)) {
 							$employee[] = $record;
 						if ($tipe != 'auto') {
@@ -258,7 +258,7 @@ class Presence extends Admin_Controller
 					}
 					if ($this->presence->insert_report($report)){
 						$this->session->set_userdata('id_periode', $id_periode);
-						if ($tipe != 'auto') {
+						if ($tipe != 'auto' && $file_name) {
 							unlink($file_name);
 						}
 						return true;
