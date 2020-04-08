@@ -30,7 +30,7 @@
 							<h5><i class="icon fas fa-info-circle"></i> Informasi</h5>
 							Sebelum melakukan import file manual data presensi pegawai, agar memperhatikan prosedur berikut:
 							<ul>
-                                <li><strong>Data pegawai yang dimasukkan tidak ada pada file log dari fingerprint</strong></li>
+                <li><strong>Data pegawai yang dimasukkan tidak ada pada file log dari fingerprint</strong></li>
 								<li>Apabila periode yang dipilih memiliki <strong>paling sedikit 1 hari libur</strong> pada hari kerja (bukan hari libur yang bertepatan akhir pekan) maka perlu menambahkan datanya pada menu <strong>Hari Libur</strong></li>
 								<li>Apabila ada pegawai yang mengajukan izin/cuti karena sakit atau keperluan lain pada periode yang hendak dipilih, maka harus menambahkan data izin pegawai tersebut ke menu <strong>Izin Cuti</strong></li>
 								<li>Pastikan file log presensi yang akan diunggah telah lengkap satu periode (bulanan)</li>

@@ -26,25 +26,25 @@ class Presence extends Admin_Controller
 
 		$this->form_validation->set_rules($this->presence->rules());
 		if ($this->form_validation->run())
-			if ($this->_extract()) 
+			if ($this->_extract('auto')) 
 				redirect('presence/report');
 		
 		$this->load->view('admin/index', $data);
 	}
 
-	// public function manual()
-	// {
-	// 	$data['title'] = 'Import Manual File';
-	// 	$data['page'] = 'admin/pages/presence/form_manual';
-	// 	$data['periode'] = $this->presence->get_all_periode();
+	public function manual()
+	{
+		$data['title'] = 'Import Manual File';
+		$data['page'] = 'admin/pages/presence/form_manual';
+		$data['periode'] = $this->presence->get_all_periode();
 
-	// 	$this->form_validation->set_rules($this->presence->rules());
-	// 	if ($this->form_validation->run())
-	// 		if ($this->_extract($upload_result, $upload_result_manual)) 
-	// 			redirect('presence/report');
+		$this->form_validation->set_rules($this->presence->rules());
+		if ($this->form_validation->run())
+			if ($this->_extract('manual')) 
+				redirect('presence/report');
 		
-	// 	$this->load->view('admin/index', $data);
-	// }
+		$this->load->view('admin/index', $data);
+	}
 
 	public function report()
 	{
@@ -173,37 +173,43 @@ class Presence extends Admin_Controller
 		return false;
 	}
 
-	// private function _do_import_manual($id_periode)
-	// {
-	// 	$periode = $this->presence->get_periode($id_periode);
-	// 	$file_name = "{$periode->tahun}_{$periode->bulan}_manual_log";
+	private function _do_import_manual($id_periode)
+	{
+		$periode = $this->presence->get_periode($id_periode);
+		$file_name = "{$periode->tahun}_{$periode->bulan}_manual_log";
 
-	// 	$this->upload->initialize($this->presence->config($file_name));
+		$this->upload->initialize($this->presence->config($file_name));
 
-	// 	if (is_uploaded_file($_FILES['file_excel']['tmp_name'])) {
-	// 		if ($this->upload->do_upload('file_excel')) {
-	// 			return true;
-	// 			} else {
-	// 				$this->session->set_flashdata('file_excel', $this->upload->display_errors());
-	// 			}
-	// 	} else {
-	// 		$this->session->set_flashdata('file_excel',  'Pilih file log terlebih dahulu');
-	// 	}
-	// 	return false;
-	// }
+		if (is_uploaded_file($_FILES['file_excel']['tmp_name'])) {
+			if ($this->upload->do_upload('file_excel')) {
+				return true;
+				} else {
+					$this->session->set_flashdata('file_excel', $this->upload->display_errors());
+				}
+		} else {
+			$this->session->set_flashdata('file_excel',  'Pilih file log terlebih dahulu');
+		}
+		return false;
+	}
 
-	private function _extract()
+	private function _extract($tipe = 'auto')
 	{
 		$post = $this->input->post();
 		$id_periode = $post['id_periode'];
 		$periode = $this->presence->get_periode($id_periode);
-		$upload_result = $this->_do_import($id_periode);
-		//$upload_result_manual = $this->_do_import_manual($id_periode);
 		$employee = array();
 		$log = array();
 		$report = array();
-		if ($upload_result) {
+
+		if ($tipe == 'auto') {
+			$upload_result = $this->_do_import($id_periode);
 			$file_name = self::$path."{$periode->tahun}_{$periode->bulan}_log.xls";
+		} else {
+			$upload_result = $this->_do_import_manual($id_periode);
+			$file_name = self::$path."{$periode->tahun}_{$periode->bulan}_manual_log.xls";
+		}
+
+		if ($upload_result) {
 			$data = new Spreadsheet_Excel_Reader($file_name);
 			$rows = $data->rowcount();
 			for ($i=5; $i <= $rows; $i++) {
@@ -212,10 +218,12 @@ class Presence extends Admin_Controller
 						$record = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
 						if ($this->presence->is_employee_nonshift($record)) {
 							$employee[] = $record;
+						if ($tipe != 'auto') {
+								$this->presence->drop_employee_logs($record, $id_periode);
+							}
 						}
 					}
 				}
-
 				if ($this->presence->is_employee_nonshift($record)) {
 					$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
 					for ($j=1; $j <= $days; $j++) { 
@@ -249,6 +257,9 @@ class Presence extends Admin_Controller
 				}
 				if ($this->presence->insert_report($report)){
 					$this->session->set_userdata('id_periode', $id_periode);
+					if ($tipe != 'auto') {
+						unlink($file_name);
+					}
 					return true;
 				}
 			}

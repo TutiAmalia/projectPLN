@@ -60,6 +60,12 @@ class M_presence extends CI_Model
 			->result_array();
 	}
 
+	public function drop_employee_logs($id_pegawai, $id_periode)
+	{
+		$this->db->delete($this->_table, array('id_periode' => $id_periode, 'id_pegawai' => $id_pegawai));
+		$this->db->delete('presensi', array('id_periode' => $id_periode, 'id_pegawai' => $id_pegawai));
+	}
+
 	public function rules()
 	{
 		return [
