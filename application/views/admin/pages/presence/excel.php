@@ -1,6 +1,6 @@
 <?php 
     $file_name = "{$employee->id}_{$periode->tahun}_{$periode->bulan}_manual.xls";
-    header('Content-Type: application/octet-stream');
+    header('Content-Type: application/vnd-ms-excel');
     header('Content-Disposition: attachment; filename="'.$file_name.'"');
 
 ?>
@@ -44,7 +44,7 @@
             </tr>
                 <td>No:</td>
                 <td></td>
-                <td><?= $employee->id ?></td>
+                <td>"<?= strval($employee->id) ?>"</td>
                 <td></td>
                 <td></td>
                 <td></td>
