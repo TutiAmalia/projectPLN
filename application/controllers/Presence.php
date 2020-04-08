@@ -210,13 +210,13 @@ class Presence extends Admin_Controller
 				if ($i % 2 == 1) {
 					if (!empty($data->val($i, 3))) {
 						$record = preg_replace('/[\x00-\x1F\x7F]/u', '', $data->val($i, 3));
-						if ($this->presence->is_employee_nonshift($record)) {
+						if ($this->presence->is_employee($record)) {
 							$employee[] = $record;
 						}
 					}
 				}
 
-				if ($this->presence->is_employee_nonshift($record)) {
+				if ($this->presence->is_employee($record)) {
 					$days = cal_days_in_month(CAL_GREGORIAN, $periode->bulan, $periode->tahun);
 					for ($j=1; $j <= $days; $j++) { 
 						if ($i % 2 == 1) {

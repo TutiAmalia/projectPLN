@@ -124,23 +124,15 @@
 						<table class="table table-bordered table-striped" id="checkin">
 							<tr>
 								<th class="p-2">Tgl</th>
-								<?php if($date) : ?>
-									<?php foreach($date as $data) : ?>
-										<td class="p-1 text-center text-bold"><?= $data ?></td>
-									<?php endforeach ?>
-									<?php else : ?>
-										<td colspan="6">Tidak ada data</td>
-								<?php endif ?>
+								<?php foreach($date as $data) : ?>
+									<td class="p-1 text-center text-bold"><?= $data ?></td>
+								<?php endforeach ?>
 							</tr>
 							<tr>
 								<th class="p-2">Jam Masuk</th>
-								<?php if($time_in) : ?>
-									<?php foreach($time_in as $index => $data) : ?>
-										<td class="p-1 text-center"><?= date_format(date_create($data), 'H:i') ?></td>
-									<?php endforeach ?>
-									<?php else : ?>
-										<td colspan="6">Tidak ada data</td>
-								<?php endif ?>
+								<?php foreach($time_in as $index => $data) : ?>
+									<td class="p-1 text-center"><?= date_format(date_create($data), 'H:i') ?></td>
+								<?php endforeach ?>
 							</tr>
 						</table>
 					</div>

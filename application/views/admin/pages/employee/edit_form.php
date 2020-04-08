@@ -70,13 +70,13 @@
 							<div class="custom-controls-stacked">
 								<div class="custom-control custom-radio">
 									<input class="custom-control-input <?php form_error('jenis') and print('is-invalid') ?>" type="radio"
-										id="jenis1" name="jenis" value="0" <?php set_value('jenis', $employee->jenis) == 0 and print('checked') ?>>
-									<label for="jenis1" class="custom-control-label">Pegawai Non-shift</label>
+										id="jenis1" name="jenis" value="1" <?php set_value('jenis', $employee->jenis) == 1 and print('checked') ?>>
+									<label for="jenis1" class="custom-control-label">Pegawai</label>
 								</div>
 								<div class="custom-control custom-radio">
 									<input class="custom-control-input <?php form_error('jenis') and print('is-invalid') ?>" type="radio"
-										id="jenis2" name="jenis" value="1" <?php set_value('jenis', $employee->jenis) == 1 and print('checked') ?>>
-									<label for="jenis2" class="custom-control-label">Pegawai shift</label>
+										id="jenis2" name="jenis" value="2" <?php set_value('jenis', $employee->jenis) == 2 and print('checked') ?>>
+									<label for="jenis2" class="custom-control-label">Nonpegawai</label>
 								</div>
 								<div class="invalid-feedback">
 									<?= form_error('jenis') ?>

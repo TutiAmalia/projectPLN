@@ -88,16 +88,6 @@ class M_presence extends CI_Model
 			->num_rows();
 	}
 
-	public function is_employee_nonshift($id)
-	{
-		return $this->db
-			->select('id')
-			->where('id', $id)
-			->where('jenis', 0)
-			->get('pegawai')
-			->num_rows();
-	}
-
 	public function get_employee($id_pegawai)
 	{
 		return $this->db
