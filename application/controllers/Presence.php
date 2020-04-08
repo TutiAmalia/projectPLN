@@ -240,27 +240,29 @@ class Presence extends Admin_Controller
 					}
 				}
 			}
-			if ($this->presence->insert_log($log)) {
-				foreach ($employee as $id) {
-					$report_temp['id_pegawai'] = $id;
-					$report_temp['id_periode'] = $id_periode;
-					$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
-					$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
-					$weekdays = count_weekdays($periode->bulan, $periode->tahun);
-					$permits = $this->presence->count_permit($id, $id_periode);
-					$holidays = $this->presence->count_holiday($id_periode);
-					$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
-					$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
-					$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
-					$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
-					array_push($report, $report_temp);
-				}
-				if ($this->presence->insert_report($report)){
-					$this->session->set_userdata('id_periode', $id_periode);
-					if ($tipe != 'auto') {
-						unlink($file_name);
+			if ($log) {
+				if ($this->presence->insert_log($log)) {
+					foreach ($employee as $id) {
+						$report_temp['id_pegawai'] = $id;
+						$report_temp['id_periode'] = $id_periode;
+						$report_temp['kehadiran'] = $this->presence->count_presence($id, $id_periode);
+						$report_temp['keterlambatan'] = $this->presence->count_delay($id, $id_periode);
+						$weekdays = count_weekdays($periode->bulan, $periode->tahun);
+						$permits = $this->presence->count_permit($id, $id_periode);
+						$holidays = $this->presence->count_holiday($id_periode);
+						$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
+						$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
+						$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
+						$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;
+						array_push($report, $report_temp);
 					}
-					return true;
+					if ($this->presence->insert_report($report)){
+						$this->session->set_userdata('id_periode', $id_periode);
+						if ($tipe != 'auto') {
+							unlink($file_name);
+						}
+						return true;
+					}
 				}
 			}
 		}
