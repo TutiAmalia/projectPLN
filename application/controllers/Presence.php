@@ -10,6 +10,7 @@ class Presence extends Admin_Controller
 		$this->load->model('m_presence', 'presence');
 		$this->load->helper('form');
 		$this->load->library(array('form_validation', 'spreadsheet_excel_reader', 'upload'));
+		error_reporting(0);
 	}
 
 	public function clear($page = '')
@@ -215,7 +216,7 @@ class Presence extends Admin_Controller
 			for ($i=5; $i <= $rows; $i++) {
 				if ($i % 2 == 1) {
 					if (!empty($data->val($i, 3))) {
-						$record = preg_replace('/[^0-9]/u', '', $data->val($i, 3));
+						$record = (int) preg_replace('/[^0-9]/u', '', $data->val($i, 3));
 						if ($this->presence->is_employee_nonshift($record)) {
 							$employee[] = $record;
 						if ($tipe != 'auto') {
