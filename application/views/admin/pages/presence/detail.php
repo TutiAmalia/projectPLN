@@ -42,7 +42,7 @@
 					</div>
 					<div class="card-body row">
 						<div class="col-md-6">
-							<!-- TABLE -->
+							<!-- DONUT CHART -->
 							<div class="card card-success card-outline">
 								<div class="card-header">
 									<h3 class="card-title"><strong class="text-muted">Data Pegawai</strong></h3>
@@ -56,14 +56,6 @@
 										<tr>
 											<th>Nama Pegawai</th>
 											<td><?= ucwords($employee->nama) ?></td>
-										</tr>
-										<tr>
-											<th>Sub Area</th>
-											<td><?= strtoupper($employee->nama_subarea)?></td>
-										</tr>
-										<tr>
-											<th>Posisi</th>
-											<td><?= ucwords(($employee->nama_posisi))?></td>
 										</tr>
 										<tr>
 											<th>Status Pegawai</th>

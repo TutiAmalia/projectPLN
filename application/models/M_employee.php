@@ -2,17 +2,16 @@
 
 class M_employee extends CI_Model 
 {
-	private $_table='pegawai';
-	public $id;
-	public $nama;
-	public $nama_subarea;
-	public $nama_posisi;
-	public $jenis;
 	
 	public function __construct()
 	{
 		parent::__construct();
 	}
+
+	private $_table='pegawai';
+	public $id;
+	public $nama;
+	public $jenis;
 
 	public function rules($tipe = 1)
 	{
@@ -24,14 +23,6 @@ class M_employee extends CI_Model
 
 			['field'=> 'nama',
 			'label' => 'nama',
-			'rules' => 'required|trim'],
-
-			['field'=> 'nama_subarea',
-			'label' => 'nama_subarea',
-			'rules' => 'required|trim'],
-
-			['field'=> 'nama_posisi',
-			'label' => 'nama_posisi',
 			'rules' => 'required|trim'],
 
 			['field'=> 'jenis',
@@ -53,8 +44,6 @@ class M_employee extends CI_Model
 		$post = $this->input->post();
 		$this->id = $post['id'];
 		$this->nama = $post['nama'];
-		$this->nama_subarea = $post['nama_subarea'];
-		$this->nama_posisi = $post['nama_posisi'];
 		$this->jenis = $post['jenis'];
 		return $this->db->insert($this->_table,$this);
 	}
@@ -69,8 +58,6 @@ class M_employee extends CI_Model
 		$post = $this->input->post();
 		$this->id = $post['id'];
 		$this->nama = $post['nama'];
-		$this->nama_subarea = $post['nama_subarea'];
-		$this->nama_posisi = $post['nama_posisi'];
 		$this->jenis = $post['jenis'];
 		return $this->db->update($this->_table, $this, ['id'=> $this->id]);
 	}
