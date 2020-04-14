@@ -125,6 +125,7 @@ class Presence extends Admin_Controller
 			$kehadiran = $detail->kehadiran;
 			$keterlambatan = $detail->keterlambatan;
 			$ketidakhadiran = $detail->ketidakhadiran;
+			$izin = $detail->izin;
 			$persentase_kehadiran = $detail->persentase_kehadiran;
 			$daily_report = $this->presence->get_daily_report($id_pegawai, $id_periode);
 			for ($i=0; $i < count($daily_report); $i++) { 
@@ -133,7 +134,7 @@ class Presence extends Admin_Controller
 			}
 			$data['label_bulanan'] = array('Hadir', 'Tidak Hadir', 'Terlambat', 'Cuti');
 			$data['warna_bulanan'] = array('#009954', '#F56954', '#F39C12', '#00C0EF');
-			$data['data_bulanan'] = array($kehadiran, $ketidakhadiran, $keterlambatan);
+			$data['data_bulanan'] = array($kehadiran, $ketidakhadiran, $keterlambatan,$izin);
 			$data['date'] = $daily ? $daily['date']: null;
 			$data['time_in'] = $daily ? $daily['time_in']: null;
 			$data['periode'] = $periode;
@@ -249,6 +250,7 @@ class Presence extends Admin_Controller
 						$permits = $this->presence->count_permit($id, $id_periode);
 						$holidays = $this->presence->count_holiday($id_periode);
 						$absences = (int) $weekdays - $report_temp['kehadiran'] - $permits - $holidays;
+						$report_temp['izin'] = $permits >= 0 ? $permits :0;
 						$report_temp['ketidakhadiran'] = $absences >= 0 ? $absences : 0;
 						$stat = $report_temp['kehadiran'] / ($weekdays - $holidays) * 100;
 						$report_temp['persentase_kehadiran'] = $stat <= 100 ? $stat : 100;

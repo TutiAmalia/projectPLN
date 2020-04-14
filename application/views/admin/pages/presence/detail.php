@@ -85,6 +85,10 @@
 											<th>Tidak Hadir</th>
 											<td><?= $data_bulanan[1]?> kali</td>
 										</tr>
+										<tr>
+											<th>Izin</th>
+											<td><?= $data_bulanan[3]?></td>
+										</tr>
 									</table>
 								</div>
 								<!-- /.card-body -->

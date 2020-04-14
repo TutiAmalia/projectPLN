@@ -54,6 +54,7 @@
 								<th>Hadir</th>
 								<th>Terlambat</th>
 								<th>Tidak hadir</th>
+								<th>Izin</th>
 								<th>Persentase Kehadiran</th>
 								<th>Detail</th>
 							</tr>
@@ -69,6 +70,7 @@
 								<td><?= $data->kehadiran ?></td>
 								<td><?= $data->keterlambatan ?></td>
 								<td><?= $data->ketidakhadiran ?></td>
+								<td><?= $data->izin?></td>
 								<td><?= $data->persentase_kehadiran ?>%</td>
 								<td>
 								<a href="<?= site_url('presence/detail/'.urlencode(base64_encode($key.$data->id_pegawai))) ?>" class="btn btn-sm text-info"><i class="fas fa-info-circle"></i> Detail</a>
