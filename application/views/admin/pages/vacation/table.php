@@ -24,7 +24,7 @@
 			<div class="card">
 			<form role="form"" action=" <?= site_url('vacation/select_periode') ?>" method="post">
 				<div class="card-header d-flex justify-content-between align-items-center">
-					<a href="<?=site_url('vacation/add') ?>" ><i class="fas fa-plus"></i> Tambah Izin Cuti</a>
+					<a href="<?=site_url('vacation/add') ?>" ><i class="fas fa-plus"></i> Tambah Izin</a>
 					<div class="col-lg-3 d-block mr-0 ml-auto">
 						<select class="custom-select select2bs4 form-control-sm" name="id_periode"
 							onchange="if(this.value != '') { this.form.submit(); }">

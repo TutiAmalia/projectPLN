@@ -119,16 +119,13 @@ class Presence extends Admin_Controller
 		$periode = $this->presence->get_periode($id_periode);
 		$daily = array();
 		if ($this->presence->is_employee($id_pegawai)) {
+			$data['detail']=$this->presence->get_detail($id_pegawai,$id_periode);
+			$detail=$data['detail'];
 			$data['employee'] = $this->presence->get_employee($id_pegawai);
-			$kehadiran = $this->presence->count_presence($id_pegawai, $id_periode);
-			$keterlambatan = $this->presence->count_delay($id_pegawai, $id_periode);
-			$weekdays = count_weekdays($periode->bulan, $periode->tahun);
-			$cuti = $this->presence->count_permit($id_pegawai, $id_periode);
-			$holidays = $this->presence->count_holiday($id_periode);
-			$absences = (int) $weekdays - $kehadiran - $cuti - $holidays;
-			$ketidakhadiran = $absences >= 0 ? $absences : 0;
-			$stat = $kehadiran / ($weekdays - $holidays) * 100;
-			$persentase_kehadiran = $stat <= 100 ? $stat : 100;
+			$kehadiran = $detail->kehadiran;
+			$keterlambatan = $detail->keterlambatan;
+			$ketidakhadiran = $detail->ketidakhadiran;
+			$persentase_kehadiran = $detail->persentase_kehadiran;
 			$daily_report = $this->presence->get_daily_report($id_pegawai, $id_periode);
 			for ($i=0; $i < count($daily_report); $i++) { 
 				$daily['date'][] = $daily_report[$i]['tanggal'];
@@ -136,7 +133,7 @@ class Presence extends Admin_Controller
 			}
 			$data['label_bulanan'] = array('Hadir', 'Tidak Hadir', 'Terlambat', 'Cuti');
 			$data['warna_bulanan'] = array('#009954', '#F56954', '#F39C12', '#00C0EF');
-			$data['data_bulanan'] = array($kehadiran, $ketidakhadiran, $keterlambatan, $cuti);
+			$data['data_bulanan'] = array($kehadiran, $ketidakhadiran, $keterlambatan);
 			$data['date'] = $daily ? $daily['date']: null;
 			$data['time_in'] = $daily ? $daily['time_in']: null;
 			$data['periode'] = $periode;

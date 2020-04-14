@@ -49,6 +49,16 @@ class M_presence extends CI_Model
 			->get()
 			->result();
 	}
+
+	public function get_detail($id_pegawai, $id_periode)
+	{
+		return $this->db
+			->select()
+			->where('id_pegawai', $id_pegawai)
+			->where('id_periode', $id_periode)
+			->get('presensi')
+			->row();
+	}
 	
 	public function get_daily_report($id_pegawai, $id_periode)
 	{
