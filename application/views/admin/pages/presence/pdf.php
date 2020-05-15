@@ -36,6 +36,7 @@
 					<th>Hadir</th>
 					<th>Terlambat</th>
 					<th>Tidak hadir</th>
+					<th>Izin</th>
 					<th>Persentase Kehadiran</th>
 				</tr>
 			</thead>
@@ -49,6 +50,7 @@
 					<td><?= $data->kehadiran ?></td>
 					<td><?= $data->keterlambatan ?></td>
 					<td><?= $data->ketidakhadiran ?></td>
+					<td><?= $data->izin?></td>
 					<td><?= $data->persentase_kehadiran ?>%</td>
 				</tr>
 				<?php $no++ ?>

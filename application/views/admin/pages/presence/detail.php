@@ -87,7 +87,7 @@
 										</tr>
 										<tr>
 											<th>Izin</th>
-											<td><?= $data_bulanan[3]?></td>
+											<td><?= $data_bulanan[3]?> kali</td>
 										</tr>
 									</table>
 								</div>

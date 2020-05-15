@@ -50,7 +50,7 @@
 						<div class="form-group col-lg-9 row">
 							<label for="nama">Sub Area</label>
 							<input class="form-control <?php form_error('nama_subarea') and print('is-invalid') ?>" type="text" name="nama_subarea"
-								value="<?= set_value('nama_subarea') ?>" />
+								value="<?= set_value('nama_subarea', $employee->nama_subarea) ?>" />
 							<div class="invalid-feedback">
 								<?= form_error('nama_subarea') ?>
 							</div>
@@ -59,7 +59,7 @@
 						<div class="form-group col-lg-9 row">
 							<label for="nama">Posisi</label>
 							<input class="form-control <?php form_error('nama_posisi') and print('is-invalid') ?>" type="text" name="nama_posisi"
-								value="<?= set_value('nama_posisi') ?>" />
+								value="<?= set_value('nama_posisi', $employee->nama_posisi) ?>" />
 							<div class="invalid-feedback">
 								<?= form_error('nama_posisi') ?>
 							</div>

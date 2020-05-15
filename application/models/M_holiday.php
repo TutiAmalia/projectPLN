@@ -17,7 +17,7 @@ class M_holiday extends CI_Model
 		return [
 			['field'=> 'tanggal',
 			'label' => 'tanggal',
-			'rules' => 'required|trim|numeric'],
+			'rules' => 'required|trim|numeric|callback_date_check'],
 
 			['field'=> 'id_periode',
 			'label' => 'periode',
@@ -29,6 +29,15 @@ class M_holiday extends CI_Model
 		];
 	}
 	
+	public function date_check($date_required){
+		
+		if(date('d-m-Y',strtotime($date_required)) >=6) {
+			$this->form_validation->set_message('date_check', 'Tanggal yang dimasukkan bukan hari kerja');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
 	
 	public function get_all_data()
 	{
